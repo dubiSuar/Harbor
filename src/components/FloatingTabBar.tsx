@@ -20,7 +20,7 @@ import { Icon, type PhosphorName } from './Icon';
 import {
   Avatar,
   FadeIn,
-  Gradient,
+  VignetteBlur,
   PressableScale,
   useReduceMotion,
 } from './ui';
@@ -37,12 +37,6 @@ const ITEMS: Item[] = [
 ];
 
 /** DECISIONS #1: gradient-only zone (no blur package). */
-const ZONE_STOPS = [
-  { offset: 0, color: 'rgba(255,255,255,0.92)' },
-  { offset: 0.55, color: 'rgba(255,255,255,0.5)' },
-  { offset: 1, color: 'rgba(255,255,255,0)' },
-];
-
 /**
  * Narrow screens. The pill is W - 104 wide (16 + 16 sides, 10 gap, 62 FAB)
  * and needs 14 (padding) + 6 (three 2 gaps) plus its items. Labels measured
@@ -108,7 +102,7 @@ export function FloatingTabBar({
 
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
-      <Gradient direction="up" stops={ZONE_STOPS} style={styles.zone} />
+      <VignetteBlur edge="bottom" style={styles.zone} />
       <View style={[styles.row, { bottom: offset }]} pointerEvents="box-none">
         <View style={styles.pill} accessibilityRole="tablist">
           {ITEMS.map(item => {

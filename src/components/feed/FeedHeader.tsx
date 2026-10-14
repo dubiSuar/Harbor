@@ -2,16 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, layout, shadow, type } from '../../theme';
-import { Gradient, Icon, Logo, PressableScale, UnreadDot } from '../ui';
+import { Icon, Logo, PressableScale, UnreadDot, VignetteBlur } from '../ui';
 
 /** The zone is 132 in the design, 82 of it below the 50 status bar. */
 const ZONE_BELOW_BAR = layout.feedHeaderZone - 50;
-const ZONE_STOPS = [
-  { offset: 0, color: 'rgba(255,255,255,0.92)' },
-  { offset: 0.55, color: 'rgba(255,255,255,0.55)' },
-  { offset: 1, color: 'rgba(255,255,255,0)' },
-];
-
 type Props = {
   /** The bell number; hidden at 0. */
   unreadCount: number;
@@ -37,8 +31,8 @@ export function FeedHeader({
   const insets = useSafeAreaInsets();
   return (
     <View pointerEvents="box-none" style={styles.root}>
-      <Gradient
-        stops={ZONE_STOPS}
+      <VignetteBlur
+        edge="top"
         style={[styles.zone, { height: insets.top + ZONE_BELOW_BAR }]}
       />
       <View

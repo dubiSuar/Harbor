@@ -50,3 +50,5 @@ export type { IconName, IconWeight, PhosphorName } from '../Icon';
 export { Logo, HarborLogo } from '../Logo';
 export { TypingDots } from './TypingDots';
 export type { TypingDotsProps } from './TypingDots';
+export { VignetteBlur } from './VignetteBlur';
+export type { VignetteBlurProps } from './VignetteBlur';

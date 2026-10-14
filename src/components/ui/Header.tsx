@@ -6,6 +6,7 @@ import {
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
+import { VignetteBlur } from './VignetteBlur';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, type } from '../../theme';
 import { IconButton } from './IconButton';
@@ -105,6 +106,14 @@ export function Header(props: HeaderProps) {
           style,
         ]}
       >
+        {floating ? (
+          // Translucent bar: content scrolls under a real blur (iOS-style).
+          <VignetteBlur
+            edge="full"
+            tint={0.72}
+            style={StyleSheet.absoluteFill}
+          />
+        ) : null}
         {back}
         <View style={styles.middle}>
           {children ??
@@ -151,7 +160,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.barFallback,
   },
   hairline: { borderBottomWidth: 1, borderBottomColor: colors.ring05 },
-  floating: { position: 'absolute', top: 0, left: 0, right: 0, zIndex: 20 },
+  floating: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 20,
+    backgroundColor: 'transparent',
+  },
   middle: { flex: 1, flexDirection: 'row', alignItems: 'center' },
   right: { flexDirection: 'row', alignItems: 'center' },
   iconRow: {

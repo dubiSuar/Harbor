@@ -30,6 +30,20 @@ export type GradientProps = {
  *     { offset: 1, color: 'rgba(24,24,27,0.6)' },
  *   ]} />
  */
+/**
+ * react-native-svg ignores the alpha of rgba() in `stopColor`, so a fade to
+ * rgba(255,255,255,0) rendered as solid white. Split it into stopOpacity.
+ */
+function splitAlpha(input: string): { color: string; opacity: number } {
+  const m = input
+    .replace(/\s+/g, '')
+    .match(/^rgba\((\d+),(\d+),(\d+),([\d.]+)\)$/i);
+  if (!m) {
+    return { color: input, opacity: 1 };
+  }
+  return { color: `rgb(${m[1]},${m[2]},${m[3]})`, opacity: Number(m[4]) };
+}
+
 export function Gradient({ stops, direction = 'down', style }: GradientProps) {
   const id = `g${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
   const coords =
@@ -43,13 +57,17 @@ export function Gradient({ stops, direction = 'down', style }: GradientProps) {
       <Svg style={StyleSheet.absoluteFill} width="100%" height="100%">
         <Defs>
           <LinearGradient id={id} {...coords}>
-            {stops.map(s => (
-              <Stop
-                key={`${s.offset}-${s.color}`}
-                offset={s.offset}
-                stopColor={s.color}
-              />
-            ))}
+            {stops.map(s => {
+              const { color, opacity } = splitAlpha(s.color);
+              return (
+                <Stop
+                  key={`${s.offset}-${s.color}`}
+                  offset={s.offset}
+                  stopColor={color}
+                  stopOpacity={opacity}
+                />
+              );
+            })}
           </LinearGradient>
         </Defs>
         <Rect x="0" y="0" width="100%" height="100%" fill={`url(#${id})`} />

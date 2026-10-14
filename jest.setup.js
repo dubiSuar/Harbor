@@ -104,3 +104,13 @@ jest.mock('react-native-image-picker', () => ({
 // Image.prefetch resolves with a boolean.
 const { Image } = require('react-native');
 Image.prefetch = jest.fn(() => Promise.resolve(true));
+
+// Native blur / masked view: render plain Views under Jest.
+jest.mock('@react-native-community/blur', () => {
+  const { View } = require('react-native');
+  return { BlurView: View, VibrancyView: View };
+});
+jest.mock('@react-native-masked-view/masked-view', () => {
+  const { View } = require('react-native');
+  return { __esModule: true, default: View };
+});
