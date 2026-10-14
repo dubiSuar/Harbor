@@ -1,0 +1,49 @@
+rules_version = '2';
+
+// Harbor Cloud Storage security rules.
+//
+//   posts/{uid}/{postId}.jpg   post images, written only by their author
+//   avatars/{uid}.jpg          profile photos, written only by their owner
+//
+// Uploads must be jpeg/png/heic/heif/webp/gif images under 10 MB. Everything is readable by signed-in
+// users (the app shows images through download URLs, which carry their own
+// token; these rules govern SDK access). Anything else is denied.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isUser(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function isSmallImage() {
+      return request.resource.size < 10 * 1024 * 1024
+        // Known raster formats only (no SVG or other active content).
+        && request.resource.contentType.matches('image/(jpeg|png|heic|heif|webp|gif)');
+    }
+
+    match /posts/{uid}/{fileName} {
+      allow read: if signedIn();
+      allow create, update: if isUser(uid)
+        && fileName.matches('[A-Za-z0-9_-]{1,64}\.jpg')
+        && isSmallImage();
+      allow delete: if isUser(uid);
+    }
+
+    match /avatars/{fileName} {
+      allow read: if signedIn();
+      allow create, update: if signedIn()
+        && fileName == request.auth.uid + '.jpg'
+        && isSmallImage();
+      allow delete: if signedIn() && fileName == request.auth.uid + '.jpg';
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

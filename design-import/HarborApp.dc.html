@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<style>
+body{margin:0}
+a{color:#2F5BD3;text-decoration:none}a:hover{color:#2447AE}
+button{background:none;border:0;padding:0;margin:0;cursor:pointer;font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+input,textarea{font:inherit;color:inherit;outline:none}
+input::placeholder,textarea::placeholder{color:#A1A1AA}
+@keyframes hb-push{from{transform:translateX(28px);opacity:0}to{transform:none;opacity:1}}
+@keyframes hb-rise{from{transform:translateY(56px);opacity:0}to{transform:none;opacity:1}}
+@keyframes hb-fade{from{opacity:0}to{opacity:1}}
+@keyframes hb-shimmer{0%{background-position:-240px 0}100%{background-position:240px 0}}
+@keyframes hb-dot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+@keyframes hb-toast{from{transform:translate(-50%,14px) scale(.96);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div style="width:410px;height:864px;padding:10px;box-sizing:border-box;background:#0E0E10;border-radius:62px;box-shadow:0 40px 80px -40px rgba(24,24,27,.55),inset 0 0 0 1.5px #2C2C31;font-family:'Geist',system-ui,sans-serif;color:#18181B;-webkit-font-smoothing:antialiased;font-feature-settings:'tnum' 0">
+<div style="position:relative;width:390px;height:844px;border-radius:52px;overflow:hidden;background:#FFFFFF;isolation:isolate">
+
+<!-- 01 ONBOARDING -->
+<sc-if value="{{ is.onboarding }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:50px 0 30px;box-sizing:border-box;animation:hb-fade .5s ease">
+  <div style="display:flex;justify-content:space-between;align-items:center;height:48px;padding:0 24px">
+    <div style="display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700;letter-spacing:-0.04em"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#2F5BD3"></rect><path d="M20 10h24a7 7 0 0 1 7 7v9a7 7 0 0 1-7 7H35l-3 5-3-5H20a7 7 0 0 1-7-7v-9a7 7 0 0 1 7-7z" fill="#FFFFFF"></path><circle cx="25.5" cy="21.5" r="2.4" fill="#2F5BD3"></circle><circle cx="32" cy="21.5" r="2.4" fill="#2F5BD3"></circle><circle cx="38.5" cy="21.5" r="2.4" fill="#2F5BD3"></circle><path d="M32 37v17" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"></path><path d="M15 42c0 8 7.5 13 17 13s17-5 17-13" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"></path><path d="M15 42l-4 3.5M15 42l5 3M49 42l4 3.5M49 42l-5 3" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"></path></svg>harbor</div>
+    <button onClick="{{ skipOb }}" style="font-size:15px;font-weight:500;color:#71717A;padding:8px 4px">Skip</button>
+  </div>
+  <div onPointerDown="{{ obDown }}" onPointerUp="{{ obUp }}" style="flex:1;position:relative;overflow:hidden;touch-action:pan-y;user-select:none">
+    <div style="display:flex;width:300%;height:100%;transform:translateX({{ obX }});transition:transform .62s cubic-bezier(.16,1,.3,1)">
+      <div style="width:33.3333%;flex:none;display:flex;flex-direction:column">
+        <div style="position:relative;height:350px">
+          <svg viewBox="0 0 390 350" width="390" height="350" aria-hidden="true" style="position:absolute;inset:0"><path d="M24 300c30-44 90-44 120 0" fill="none" stroke="#2F5BD3" stroke-width="6" stroke-linecap="round"></path><path d="M290 40c18 0 30 12 30 30" fill="none" stroke="#2F5BD3" stroke-width="6" stroke-linecap="round"></path><circle cx="352" cy="128" r="9" fill="#F6B51B"></circle><circle cx="60" cy="40" r="5" fill="#2F5BD3"></circle></svg>
+          <img src="https://picsum.photos/seed/hb-ob-picnic/400/620" alt="" draggable="false" style="position:absolute;left:44px;top:28px;width:160px;height:250px;object-fit:cover;border-radius:80px 80px 28px 28px;background:#E4E4E7">
+          <img src="https://picsum.photos/seed/hb-ob-harbour/400/400" alt="" draggable="false" style="position:absolute;left:176px;top:62px;width:148px;height:148px;object-fit:cover;border-radius:50%;border:6px solid #fff;box-sizing:border-box;background:#E4E4E7">
+          <img src="https://picsum.photos/seed/hb-ob-table/500/260" alt="" draggable="false" style="position:absolute;left:208px;top:226px;width:150px;height:72px;object-fit:cover;border-radius:36px;background:#E4E4E7">
+          <div style="position:absolute;left:150px;bottom:12px;display:flex;align-items:center;gap:8px;padding:7px 13px 7px 7px;background:#FFFFFF;border-radius:999px;box-shadow:0 12px 30px -12px rgba(24,24,27,.3),inset 0 0 0 1px rgba(24,24,27,.06);font-size:13px;font-weight:500"><span style="width:24px;height:24px;border-radius:50%;background:#2F5BD3;display:grid;place-items:center"><i class="ph-fill ph-heart" style="color:#fff;font-size:12px"></i></span>Hana and 23 others</div>
+        </div>
+        <div style="padding:14px 28px 0">
+          <h1 style="margin:0;font-size:31px;line-height:1.08;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">Stay close to the people you'd actually call.</h1>
+          <p style="margin:12px 0 0;font-size:16px;line-height:1.5;color:#52525B;text-wrap:pretty">Your feed shows friends, family, and the groups you've joined, in the order they posted.</p>
+        </div>
+      </div>
+      <div style="width:33.3333%;flex:none;display:flex;flex-direction:column">
+        <div style="position:relative;height:350px">
+          <svg viewBox="0 0 390 350" width="390" height="350" aria-hidden="true" style="position:absolute;inset:0"><path d="M330 300l6-18 6 18 18 6-18 6-6 18-6-18-18-6z" fill="#F6B51B"></path><path d="M30 60c0-16 13-28 28-28" fill="none" stroke="#2F5BD3" stroke-width="6" stroke-linecap="round"></path><circle cx="46" cy="312" r="6" fill="#2F5BD3"></circle></svg>
+          <img src="https://picsum.photos/seed/hb-ob-coast/520/640" alt="" draggable="false" style="position:absolute;left:36px;top:34px;width:176px;height:214px;object-fit:cover;border-radius:36px;background:#E4E4E7">
+          <img src="https://picsum.photos/seed/hb-ob-market/400/220" alt="" draggable="false" style="position:absolute;left:222px;top:34px;width:134px;height:74px;object-fit:cover;border-radius:67px 67px 0 0;background:#E4E4E7">
+          <img src="https://picsum.photos/seed/hb-ob-bike/400/400" alt="" draggable="false" style="position:absolute;left:222px;top:114px;width:134px;height:134px;object-fit:cover;border-radius:50%;background:#E4E4E7">
+          <img src="https://picsum.photos/seed/hb-ob-bread/400/220" alt="" draggable="false" style="position:absolute;left:36px;top:256px;width:176px;height:66px;object-fit:cover;border-radius:0 0 33px 33px;background:#E4E4E7">
+          <div style="position:absolute;left:222px;top:258px;width:134px;height:62px;border-radius:31px;background:#2F5BD3;display:flex;align-items:center;justify-content:center;gap:8px;color:#FFFFFF;font-size:14px;font-weight:600"><i class="ph ph-images" style="font-size:18px"></i>12 photos</div>
+        </div>
+        <div style="padding:14px 28px 0">
+          <h1 style="margin:0;font-size:31px;line-height:1.08;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">Share the whole album, not just one good shot.</h1>
+          <p style="margin:12px 0 0;font-size:16px;line-height:1.5;color:#52525B;text-wrap:pretty">Post up to 20 photos at once, tag friends, and choose who sees each post.</p>
+        </div>
+      </div>
+      <div style="width:33.3333%;flex:none;display:flex;flex-direction:column">
+        <div style="position:relative;height:350px">
+          <svg viewBox="0 0 390 350" width="390" height="350" aria-hidden="true" style="position:absolute;inset:0"><circle cx="195" cy="180" r="150" fill="#EEF2FD"></circle><path d="M330 56l5-15 5 15 15 5-15 5-5 15-5-15-15-5z" fill="#2F5BD3"></path><path d="M40 290l3-9 3 9 9 3-9 3-3 9-3-9-9-3z" fill="#F6B51B"></path><path d="M300 300c20 0 36-10 44-26" fill="none" stroke="#2F5BD3" stroke-width="6" stroke-linecap="round"></path></svg>
+          <img src="https://picsum.photos/seed/hb-ob-hike/300/300" alt="" draggable="false" style="position:absolute;left:30px;top:40px;width:84px;height:84px;object-fit:cover;border-radius:50%;border:5px solid #fff;box-sizing:border-box;background:#E4E4E7">
+          <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+            <div style="width:278px;background:#fff;border-radius:26px;padding:16px;box-sizing:border-box;box-shadow:0 24px 48px -24px rgba(47,91,211,.4),inset 0 0 0 1px rgba(24,24,27,.05)">
+              <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="width:28px;height:28px;border-radius:50%;background:#2F5BD3;display:grid;place-items:center"><i class="ph-fill ph-sparkle" style="color:#fff;font-size:15px"></i></span><div><div style="font-size:14px;font-weight:600">Harbor Brief</div><div style="font-size:11.5px;color:#71717A">Since 7:40 AM · 23 posts</div></div></div>
+              <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.35;color:#3F3F46">
+                <div style="display:flex;gap:8px"><img src="https://i.pravatar.cc/80?img=32" alt="" style="width:20px;height:20px;border-radius:50%;flex:none">Ines shared her pastéis de nata recipe.</div>
+                <div style="display:flex;gap:8px"><img src="https://i.pravatar.cc/80?img=12" alt="" style="width:20px;height:20px;border-radius:50%;flex:none">Tomasz's library survey closes Wednesday.</div>
+                <div style="display:flex;gap:8px"><img src="https://i.pravatar.cc/80?img=45" alt="" style="width:20px;height:20px;border-radius:50%;flex:none">Priya's hike is today's most-liked post.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:14px 28px 0">
+          <h1 style="margin:0;font-size:31px;line-height:1.08;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">Catch up in thirty seconds.</h1>
+          <p style="margin:12px 0 0;font-size:16px;line-height:1.5;color:#52525B;text-wrap:pretty">Harbor Brief summarizes what you missed across posts, comments, and messages. Turn it off anytime.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:6px;padding:0 28px 20px">
+    <sc-for list="{{ obDots }}" as="d" hint-placeholder-count="3"><span style="height:6px;border-radius:3px;width:{{ d.w }};background:{{ d.bg }};transition:all .45s cubic-bezier(.16,1,.3,1)"></span></sc-for>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:6px;padding:0 20px">
+    <button onClick="{{ obNext }}" style="height:56px;border-radius:999px;background:#2F5BD3;color:#fff;font-size:16px;font-weight:600;letter-spacing:-0.01em;transition:transform .2s cubic-bezier(.16,1,.3,1);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)" style-active="transform:scale(0.98)">{{ obCta }}</button>
+    <button onClick="{{ toLogin }}" style="height:44px;font-size:15px;font-weight:500;color:#3F3F46">I already have an account</button>
+  </div>
+</div>
+</sc-if>
+
+<!-- 02 SIGN IN -->
+<sc-if value="{{ is.login }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:50px 24px 30px;box-sizing:border-box;display:flex;flex-direction:column;animation:hb-push .45s cubic-bezier(.16,1,.3,1)">
+  <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true" style="margin-top:34px;display:block"><rect width="64" height="64" rx="18" fill="#2F5BD3"></rect><path d="M20 10h24a7 7 0 0 1 7 7v9a7 7 0 0 1-7 7H35l-3 5-3-5H20a7 7 0 0 1-7-7v-9a7 7 0 0 1 7-7z" fill="#FFFFFF"></path><circle cx="25.5" cy="21.5" r="2.4" fill="#2F5BD3"></circle><circle cx="32" cy="21.5" r="2.4" fill="#2F5BD3"></circle><circle cx="38.5" cy="21.5" r="2.4" fill="#2F5BD3"></circle><path d="M32 37v17" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"></path><path d="M15 42c0 8 7.5 13 17 13s17-5 17-13" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"></path><path d="M15 42l-4 3.5M15 42l5 3M49 42l4 3.5M49 42l-5 3" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"></path></svg>
+  <h1 style="margin:26px 0 8px;font-size:30px;line-height:1.1;font-weight:600;letter-spacing:-0.035em">Welcome back</h1>
+  <p style="margin:0 0 28px;font-size:16px;line-height:1.5;color:#52525B">Sign in to see what your people have been up to.</p>
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <label style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:13px;font-weight:600;color:#3F3F46">Email</span>
+      <input type="email" value="{{ login.email }}" onChange="{{ setLEmail }}" placeholder="noor@haddad.studio" style="height:52px;border-radius:14px;background:#F4F4F5;border:1.5px solid {{ lv.emailBorder }};padding:0 16px;font-size:16px;box-sizing:border-box;transition:border-color .2s">
+      <sc-if value="{{ lv.emailErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#DC2626;display:flex;gap:6px;align-items:center"><i class="ph ph-warning-circle"></i>{{ lv.emailMsg }}</span></sc-if>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:13px;font-weight:600;color:#3F3F46">Password</span>
+      <div style="position:relative">
+        <input type="{{ lv.pwType }}" value="{{ login.pw }}" onChange="{{ setLPw }}" placeholder="At least 8 characters" style="width:100%;height:52px;border-radius:14px;background:#F4F4F5;border:1.5px solid {{ lv.pwBorder }};padding:0 50px 0 16px;font-size:16px;box-sizing:border-box;transition:border-color .2s">
+        <button type="button" onClick="{{ toggleLPw }}" style="position:absolute;right:6px;top:6px;width:40px;height:40px;display:grid;place-items:center;font-size:20px;color:#71717A"><i class="{{ lv.eye }}"></i></button>
+      </div>
+      <sc-if value="{{ lv.pwErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#DC2626;display:flex;gap:6px;align-items:center"><i class="ph ph-warning-circle"></i>{{ lv.pwMsg }}</span></sc-if>
+    </label>
+  </div>
+  <button onClick="{{ forgot }}" style="align-self:flex-end;margin:12px 0 22px;font-size:14px;font-weight:600;color:#2F5BD3">Forgot password?</button>
+  <button onClick="{{ submitLogin }}" style="height:54px;border-radius:16px;background:#2F5BD3;color:#fff;font-size:16px;font-weight:600;opacity:{{ lv.btnOpacity }};transition:transform .2s cubic-bezier(.16,1,.3,1),opacity .2s;box-shadow:inset 0 1px 0 rgba(255,255,255,.18)" style-active="transform:scale(0.98)">{{ lv.btn }}</button>
+  <div style="display:flex;align-items:center;gap:12px;margin:24px 0;color:#A1A1AA;font-size:13px"><span style="flex:1;height:1px;background:#E4E4E7"></span>or<span style="flex:1;height:1px;background:#E4E4E7"></span></div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <button onClick="{{ socialLogin }}" style="height:52px;border-radius:16px;border:1.5px solid #E4E4E7;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:600;transition:transform .2s" style-active="transform:scale(0.98)"><i class="ph-fill ph-apple-logo" style="font-size:20px"></i>Continue with Apple</button>
+    <button onClick="{{ socialLogin }}" style="height:52px;border-radius:16px;border:1.5px solid #E4E4E7;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:600;transition:transform .2s" style-active="transform:scale(0.98)"><i class="ph ph-google-logo" style="font-size:20px"></i>Continue with Google</button>
+  </div>
+  <div style="flex:1;min-height:20px"></div>
+  <div style="text-align:center;font-size:14.5px;color:#52525B">New to Harbor? <button onClick="{{ toRegister }}" style="font-weight:600;color:#2F5BD3">Create account</button></div>
+</div>
+</sc-if>
+
+<!-- 03 CREATE ACCOUNT -->
+<sc-if value="{{ is.register }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:50px 24px 30px;box-sizing:border-box;display:flex;flex-direction:column;animation:hb-push .45s cubic-bezier(.16,1,.3,1)">
+  <button onClick="{{ back }}" style="margin:4px 0 0 -10px;width:44px;height:44px;display:grid;place-items:center;font-size:24px"><i class="ph ph-caret-left"></i></button>
+  <h1 style="margin:14px 0 8px;font-size:30px;line-height:1.1;font-weight:600;letter-spacing:-0.035em">Create your account</h1>
+  <p style="margin:0 0 26px;font-size:16px;line-height:1.5;color:#52525B">Use the name your friends know you by.</p>
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <label style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:13px;font-weight:600;color:#3F3F46">Full name</span>
+      <input value="{{ reg.name }}" onChange="{{ setRName }}" placeholder="Noor Haddad" style="height:52px;border-radius:14px;background:#F4F4F5;border:1.5px solid {{ rv.nameBorder }};padding:0 16px;font-size:16px;box-sizing:border-box">
+      <sc-if value="{{ rv.nameErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#DC2626">Enter your name.</span></sc-if>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:13px;font-weight:600;color:#3F3F46">Email</span>
+      <input type="email" value="{{ reg.email }}" onChange="{{ setREmail }}" placeholder="noor@haddad.studio" style="height:52px;border-radius:14px;background:#F4F4F5;border:1.5px solid {{ rv.emailBorder }};padding:0 16px;font-size:16px;box-sizing:border-box">
+      <sc-if value="{{ rv.emailErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#DC2626">Enter a valid email address.</span></sc-if>
+    </label>
+    <label style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:13px;font-weight:600;color:#3F3F46">Password</span>
+      <input type="password" value="{{ reg.pw }}" onChange="{{ setRPw }}" placeholder="At least 8 characters" style="height:52px;border-radius:14px;background:#F4F4F5;border:1.5px solid {{ rv.pwBorder }};padding:0 16px;font-size:16px;box-sizing:border-box">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:4px"><sc-for list="{{ rv.bars }}" as="b" hint-placeholder-count="4"><span style="height:4px;border-radius:2px;background:{{ b.bg }};transition:background .3s"></span></sc-for></div>
+        <span style="font-size:12.5px;color:#71717A;min-width:44px;text-align:right">{{ rv.strength }}</span>
+      </div>
+      <sc-if value="{{ rv.pwErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#DC2626">Use at least 8 characters.</span></sc-if>
+    </label>
+    <button onClick="{{ toggleAgree }}" style="display:flex;gap:12px;align-items:flex-start;text-align:left;font-size:14px;line-height:1.45;color:#52525B">
+      <span style="flex:none;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:{{ rv.agreeBg }};border:1.5px solid {{ rv.agreeBorder }};box-sizing:border-box;transition:all .2s"><i class="ph ph-check" style="font-size:13px;color:#fff"></i></span>
+      <span>I agree to the Terms and Privacy Policy. Harbor never sells your data.</span>
+    </button>
+    <sc-if value="{{ rv.agreeErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#DC2626;margin-top:-8px">Please accept the terms to continue.</span></sc-if>
+  </div>
+  <div style="flex:1;min-height:24px"></div>
+  <button onClick="{{ submitReg }}" style="height:54px;border-radius:16px;background:#2F5BD3;color:#fff;font-size:16px;font-weight:600;opacity:{{ rv.btnOpacity }};transition:transform .2s cubic-bezier(.16,1,.3,1);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)" style-active="transform:scale(0.98)">{{ rv.btn }}</button>
+  <div style="text-align:center;font-size:14.5px;color:#52525B;margin-top:18px">Already have an account? <button onClick="{{ toLogin }}" style="font-weight:600;color:#2F5BD3">Sign in</button></div>
+</div>
+</sc-if>
+
+<!-- 04 FEED -->
+<sc-if value="{{ is.feed }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;animation:hb-fade .35s ease">
+  <div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:110px 0 130px;box-sizing:border-box">
+    <div style="display:flex;align-items:center;gap:10px;padding:2px 16px 14px">
+      <img src="https://i.pravatar.cc/160?img=47" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
+      <button onClick="{{ toCreate }}" style="flex:1;height:40px;border-radius:20px;background:#F4F4F5;text-align:left;padding:0 16px;font-size:15px;color:#71717A;transition:transform .2s" style-active="transform:scale(0.98)">What's on your mind, Noor?</button>
+      <button onClick="{{ toCreatePhoto }}" style="width:40px;height:40px;display:grid;place-items:center;font-size:23px;color:#2F5BD3"><i class="ph ph-image-square"></i></button>
+    </div>
+    <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:0 16px 16px">
+      <button onClick="{{ toCreate }}" style="flex:none;width:104px;height:172px;border-radius:18px;overflow:hidden;position:relative;background:#fff;box-shadow:inset 0 0 0 1px #E4E4E7;transition:transform .25s cubic-bezier(.16,1,.3,1)" style-active="transform:scale(0.96)">
+        <img src="https://i.pravatar.cc/300?img=47" alt="" style="width:100%;height:118px;object-fit:cover;display:block">
+        <span style="position:absolute;left:50%;top:102px;transform:translateX(-50%);width:32px;height:32px;border-radius:50%;background:#2F5BD3;border:3px solid #fff;display:grid;place-items:center;box-sizing:border-box"><i class="ph ph-plus" style="color:#fff;font-size:16px;font-weight:700"></i></span>
+        <span style="position:absolute;left:0;right:0;bottom:12px;font-size:12.5px;font-weight:600;text-align:center">Create story</span>
+      </button>
+      <sc-for list="{{ storyCards }}" as="st" hint-placeholder-count="3">
+        <button onClick="{{ st.open }}" style="flex:none;width:104px;height:172px;border-radius:18px;overflow:hidden;position:relative;background:#E4E4E7;transition:transform .25s cubic-bezier(.16,1,.3,1)" style-active="transform:scale(0.96)">
+          <img src="{{ st.img }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+          <span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,24,27,0) 45%,rgba(24,24,27,.6) 100%)"></span>
+          <img src="{{ st.a.av }}" alt="" style="position:absolute;top:8px;left:8px;width:36px;height:36px;border-radius:50%;object-fit:cover;border:3px solid {{ st.ring }};box-sizing:border-box">
+          <span style="position:absolute;left:10px;right:10px;bottom:10px;color:#fff;font-size:12.5px;font-weight:600;text-align:left">{{ st.a.first }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ set.brief }}" hint-placeholder-val="{{ true }}">
+    <div style="border-top:8px solid #F4F4F5;padding:14px 16px">
+      <div style="border-radius:22px;background:#F5F7FE;box-shadow:inset 0 0 0 1px #E1E8FB;padding:14px 14px 12px">
+        <button onClick="{{ toggleBrief }}" style="width:100%;display:flex;align-items:center;gap:10px;text-align:left">
+          <span style="width:32px;height:32px;border-radius:50%;background:#2F5BD3;display:grid;place-items:center;flex:none"><i class="ph-fill ph-sparkle" style="color:#fff;font-size:17px"></i></span>
+          <span style="flex:1"><span style="display:block;font-size:15px;font-weight:600;letter-spacing:-0.01em">Harbor Brief</span><span style="display:block;font-size:12.5px;color:#52525B">While you were away · 23 posts</span></span>
+          <i class="ph ph-caret-down" style="font-size:18px;color:#52525B;transform:rotate({{ briefRot }});transition:transform .4s cubic-bezier(.16,1,.3,1)"></i>
+        </button>
+        <sc-if value="{{ briefOpen }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:11px;animation:hb-fade .3s ease">
+            <sc-if value="{{ briefLoading }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:9px;padding:4px 0"><div style="height:12px;border-radius:6px;background:linear-gradient(90deg,#E4EAFA,#F8F9FE,#E4EAFA);background-size:480px 100%;animation:hb-shimmer 1.2s linear infinite"></div><div style="height:12px;width:86%;border-radius:6px;background:linear-gradient(90deg,#E4EAFA,#F8F9FE,#E4EAFA);background-size:480px 100%;animation:hb-shimmer 1.2s linear infinite"></div><div style="height:12px;width:64%;border-radius:6px;background:linear-gradient(90deg,#E4EAFA,#F8F9FE,#E4EAFA);background-size:480px 100%;animation:hb-shimmer 1.2s linear infinite"></div></div>
+            </sc-if>
+            <sc-if value="{{ briefReady }}" hint-placeholder-val="{{ true }}">
+              <sc-for list="{{ briefItems }}" as="b" hint-placeholder-count="3">
+                <div style="display:flex;gap:9px;align-items:flex-start;font-size:14.5px;line-height:1.42;color:#27272A;text-wrap:pretty"><img src="{{ b.a.av }}" alt="" style="width:22px;height:22px;border-radius:50%;object-fit:cover;flex:none;margin-top:1px">{{ b.text }}</div>
+              </sc-for>
+            </sc-if>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:2px">
+              <button onClick="{{ regenBrief }}" style="height:32px;padding:0 12px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px #DCE3F8;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#2447AE;transition:transform .2s" style-active="transform:scale(0.96)"><i class="ph ph-arrow-clockwise"></i>Refresh</button>
+              <button onClick="{{ toBrief }}" style="height:32px;padding:0 12px;border-radius:10px;display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#2447AE">Full brief<i class="ph ph-arrow-right"></i></button>
+              <span style="margin-left:auto;font-size:11.5px;color:#71717A">AI · may miss context</span>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    </sc-if>
+    <sc-for list="{{ feedPosts }}" as="p" hint-placeholder-count="2">
+      <article style="padding:14px 0 4px;border-top:8px solid #F4F4F5">
+        <div style="display:flex;align-items:center;gap:10px;padding:0 16px">
+          <img src="{{ p.a.av }}" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover;background:#E4E4E7">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">{{ p.a.name }}</div>
+            <div style="display:flex;align-items:center;gap:4px;font-size:13px;color:#71717A">{{ p.time }} · {{ p.place }}<i class="ph ph-users" style="font-size:13px"></i></div>
+          </div>
+          <button onClick="{{ p.onMore }}" style="width:36px;height:36px;display:grid;place-items:center;font-size:20px;color:#71717A"><i class="ph ph-dots-three"></i></button>
+        </div>
+        <sc-if value="{{ p.hasText }}" hint-placeholder-val="{{ true }}"><p onClick="{{ p.onOpen }}" style="margin:10px 16px 0;font-size:15px;line-height:1.45;color:#27272A;text-wrap:pretty;cursor:pointer">{{ p.text }}</p></sc-if>
+        <sc-if value="{{ p.hasImages }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative;margin-top:12px">
+            <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;padding:0 16px;scroll-padding:0 16px">
+              <sc-for list="{{ p.imgs }}" as="im" hint-placeholder-count="1"><img src="{{ im.src }}" alt="" onDoubleClick="{{ p.onLike }}" style="flex:none;width:{{ im.w }};aspect-ratio:{{ im.ratio }};object-fit:cover;border-radius:18px;scroll-snap-align:start;background:#E4E4E7;display:block"></sc-for>
+            </div>
+            <sc-if value="{{ p.multi }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:10px;right:26px;padding:4px 9px;border-radius:999px;background:rgba(24,24,27,.6);backdrop-filter:blur(10px);color:#fff;font-size:12px;font-weight:600">{{ p.imgCount }}</span></sc-if>
+          </div>
+        </sc-if>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px 6px;font-size:13px;color:#71717A">
+          <span style="display:flex;align-items:center;gap:6px"><span style="width:18px;height:18px;border-radius:50%;background:#2F5BD3;display:grid;place-items:center"><i class="ph-fill ph-heart" style="color:#fff;font-size:10px"></i></span>{{ p.likesText }}</span>
+          <button onClick="{{ p.onOpen }}" style="font-size:13px;color:#71717A">{{ p.commentsText }} · {{ p.sharesText }}</button>
+        </div>
+        <div style="display:flex;margin:0 8px;border-top:1px solid #F0F0F2;padding-top:2px">
+          <button onClick="{{ p.onLike }}" style="flex:1;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:600;color:{{ p.likeColor }};transition:transform .25s cubic-bezier(.34,1.56,.64,1),background .15s" style-active="transform:scale(0.92);background:#F4F4F5"><i class="{{ p.likeCls }}" style="font-size:20px"></i>{{ p.likeLabel }}</button>
+          <button onClick="{{ p.onOpen }}" style="flex:1;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:600;color:#3F3F46" style-active="background:#F4F4F5"><i class="ph ph-chat-circle" style="font-size:20px"></i>Comment</button>
+          <button onClick="{{ p.onShare }}" style="flex:1;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:600;color:#3F3F46" style-active="background:#F4F4F5"><i class="ph ph-share-fat" style="font-size:20px"></i>Share</button>
+        </div>
+      </article>
+    </sc-for>
+    <div style="border-top:8px solid #F4F4F5;padding:28px 24px;text-align:center;font-size:14px;color:#71717A">You're all caught up from the last 24 hours.</div>
+  </div>
+  <div style="position:absolute;top:0;left:0;right:0;height:132px;z-index:20;pointer-events:none;backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 50%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 50%,transparent 100%)"></div>
+  <div style="position:absolute;top:0;left:0;right:0;height:132px;z-index:21;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.55) 55%,rgba(255,255,255,0) 100%)"></div>
+  <div style="position:absolute;top:52px;left:16px;right:16px;z-index:22;height:44px;display:flex;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 6px;border-radius:22px;background:#FFFFFF;box-shadow:0 8px 24px -14px rgba(24,24,27,.3),inset 0 0 0 1px rgba(24,24,27,.06)">
+      <svg viewBox="0 0 64 64" width="32" height="32" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#2F5BD3"></rect><path d="M20 10h24a7 7 0 0 1 7 7v9a7 7 0 0 1-7 7H35l-3 5-3-5H20a7 7 0 0 1-7-7v-9a7 7 0 0 1 7-7z" fill="#FFFFFF"></path><circle cx="25.5" cy="21.5" r="2.4" fill="#2F5BD3"></circle><circle cx="32" cy="21.5" r="2.4" fill="#2F5BD3"></circle><circle cx="38.5" cy="21.5" r="2.4" fill="#2F5BD3"></circle><path d="M32 37v17" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"></path><path d="M15 42c0 8 7.5 13 17 13s17-5 17-13" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"></path><path d="M15 42l-4 3.5M15 42l5 3M49 42l4 3.5M49 42l-5 3" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"></path></svg>
+      <span style="font-size:18px;font-weight:600;letter-spacing:-0.03em">Home</span>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button onClick="{{ toNotifs }}" style="position:relative;height:44px;min-width:44px;padding:0 14px;border-radius:22px;background:#FFFFFF;box-shadow:0 8px 24px -14px rgba(24,24,27,.3),inset 0 0 0 1px rgba(24,24,27,.06);display:flex;align-items:center;gap:6px;font-size:21px;transition:transform .2s" style-active="transform:scale(0.94)"><i class="ph ph-bell"></i><sc-if value="{{ hasUnread }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;font-weight:600">{{ unreadCount }}</span></sc-if></button>
+      <button onClick="{{ toMessages }}" style="position:relative;width:44px;height:44px;border-radius:22px;background:#FFFFFF;box-shadow:0 8px 24px -14px rgba(24,24,27,.3),inset 0 0 0 1px rgba(24,24,27,.06);display:grid;place-items:center;font-size:21px;transition:transform .2s" style-active="transform:scale(0.94)"><i class="ph ph-chat-circle-dots"></i><span style="position:absolute;top:8px;right:9px;width:9px;height:9px;border-radius:50%;background:#2F5BD3;border:2px solid #fff;box-sizing:content-box"></span></button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- 05 POST DETAIL -->
+<sc-if value="{{ is.post }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:#fff;animation:hb-push .45s cubic-bezier(.16,1,.3,1)">
+  <div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:98px 0 110px;box-sizing:border-box">
+    <div style="display:flex;align-items:center;gap:10px;padding:6px 16px 0">
+      <img src="{{ cur.a.av }}" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
+      <div style="flex:1"><div style="font-size:15px;font-weight:600">{{ cur.a.name }}</div><div style="font-size:13px;color:#71717A">{{ cur.time }} · {{ cur.place }}</div></div>
+    </div>
+    <sc-if value="{{ cur.hasText }}" hint-placeholder-val="{{ true }}"><p style="margin:10px 16px 0;font-size:15.5px;line-height:1.45;color:#27272A;text-wrap:pretty">{{ cur.text }}</p></sc-if>
+    <sc-if value="{{ cur.hasImages }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;padding:12px 16px 0">
+        <sc-for list="{{ cur.imgs }}" as="im" hint-placeholder-count="1"><img src="{{ im.src }}" alt="" onDoubleClick="{{ cur.onLike }}" style="flex:none;width:{{ im.w }};aspect-ratio:{{ im.ratio }};object-fit:cover;border-radius:18px;scroll-snap-align:start;background:#E4E4E7;display:block"></sc-for>
+      </div>
+    </sc-if>
+    <div style="display:flex;margin:10px 8px 0;border-top:1px solid #F0F0F2;border-bottom:1px solid #F0F0F2">
+      <button onClick="{{ cur.onLike }}" style="flex:1;height:42px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:600;color:{{ cur.likeColor }};transition:transform .25s cubic-bezier(.34,1.56,.64,1)" style-active="transform:scale(0.92)"><i class="{{ cur.likeCls }}" style="font-size:20px"></i>{{ cur.likesText }}</button>
+      <button onClick="{{ focusComment }}" style="flex:1;height:42px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:600;color:#3F3F46"><i class="ph ph-chat-circle" style="font-size:20px"></i>{{ cur.comments }}</button>
+      <button onClick="{{ cur.onShare }}" style="flex:1;height:42px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:600;color:#3F3F46"><i class="ph ph-share-fat" style="font-size:20px"></i>{{ cur.shares }}</button>
+    </div>
+    <sc-if value="{{ set.csum }}" hint-placeholder-val="{{ true }}">
+      <div style="margin:14px 16px 6px;border-radius:20px;background:#F5F7FE;box-shadow:inset 0 0 0 1px #E1E8FB;padding:13px 14px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><i class="ph-fill ph-sparkle" style="color:#2F5BD3;font-size:17px"></i><span style="font-size:13.5px;font-weight:600">Comment summary</span><span style="font-size:12.5px;color:#71717A">· {{ cur.comments }} comments</span>
+          <button onClick="{{ sumComments }}" style="margin-left:auto;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#2447AE;font-size:16px;background:#fff;box-shadow:inset 0 0 0 1px #DCE3F8"><i class="ph ph-arrow-clockwise"></i></button></div>
+        <sc-if value="{{ cSumLoading }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:8px;padding:4px 0"><div style="height:11px;border-radius:6px;background:linear-gradient(90deg,#E4EAFA,#F8F9FE,#E4EAFA);background-size:480px 100%;animation:hb-shimmer 1.2s linear infinite"></div><div style="height:11px;width:72%;border-radius:6px;background:linear-gradient(90deg,#E4EAFA,#F8F9FE,#E4EAFA);background-size:480px 100%;animation:hb-shimmer 1.2s linear infinite"></div></div></sc-if>
+        <sc-if value="{{ cSumReady }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:14px;line-height:1.45;color:#27272A;text-wrap:pretty">{{ cSumText }}</p></sc-if>
+      </div>
+    </sc-if>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px 4px"><span style="font-size:15px;font-weight:600">Most relevant</span><i class="ph ph-caret-down" style="color:#71717A"></i></div>
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <sc-for list="{{ curComments }}" as="c" hint-placeholder-count="3">
+        <div style="display:flex;gap:10px;padding:6px 16px;animation:hb-fade .35s ease">
+          <img src="{{ c.a.av }}" alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none">
+          <div style="flex:1;min-width:0">
+            <div style="display:inline-block;max-width:100%;box-sizing:border-box;background:#F4F4F5;border-radius:18px;padding:8px 13px 9px"><div style="font-size:13.5px;font-weight:600">{{ c.a.name }}</div><div style="font-size:14.5px;line-height:1.4;color:#27272A;text-wrap:pretty">{{ c.text }}</div></div>
+            <div style="display:flex;gap:16px;align-items:center;padding:4px 12px 0;font-size:12.5px;color:#71717A;font-weight:500"><span>{{ c.time }}</span><button onClick="{{ c.onLike }}" style="font-weight:600;color:{{ c.likeColor }}">Like</button><button onClick="{{ c.onReply }}" style="font-weight:600">Reply</button><sc-if value="{{ c.hasLikes }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;display:flex;align-items:center;gap:4px"><i class="ph-fill ph-heart" style="color:#2F5BD3"></i>{{ c.likes }}</span></sc-if></div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="position:absolute;top:0;left:0;right:0;z-index:20;height:98px;padding:50px 8px 0;box-sizing:border-box;display:flex;align-items:center;gap:2px;background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)">
+    <button onClick="{{ back }}" style="width:44px;height:44px;display:grid;place-items:center;font-size:24px"><i class="ph ph-caret-left"></i></button>
+    <div style="font-size:17px;font-weight:600;letter-spacing:-0.015em">{{ cur.a.first }}'s post</div>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:0;z-index:20;padding:10px 12px 30px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.86);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:0 -1px 0 rgba(24,24,27,.06)">
+    <img src="https://i.pravatar.cc/160?img=47" alt="" style="width:34px;height:34px;border-radius:50%;object-fit:cover">
+    <input ref="{{ commentRef }}" value="{{ cDraft }}" onChange="{{ setCDraft }}" onKeyDown="{{ cKey }}" placeholder="Write a comment…" style="flex:1;height:40px;border-radius:20px;background:#F4F4F5;border:0;padding:0 16px;font-size:15px">
+    <button onClick="{{ addComment }}" style="width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:19px;color:#fff;background:{{ cSendBg }};transition:background .2s,transform .2s" style-active="transform:scale(0.9)"><i class="ph-fill ph-paper-plane-right"></i></button>
+  </div>
+</div>
+</sc-if>
+
+<!-- 06 CREATE POST -->
+<sc-if value="{{ is.create }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;padding-top:50px;animation:hb-rise .5s cubic-bezier(.16,1,.3,1)">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 12px;border-bottom:1px solid #F0F0F2">
+    <button onClick="{{ back }}" style="width:40px;height:40px;display:grid;place-items:center;font-size:22px"><i class="ph ph-x"></i></button>
+    <div style="font-size:17px;font-weight:600;letter-spacing:-0.015em">Create post</div>
+    <button onClick="{{ submitPost }}" style="height:34px;padding:0 16px;border-radius:12px;font-size:15px;font-weight:600;background:{{ cv.postBg }};color:{{ cv.postColor }};transition:all .2s" style-active="transform:scale(0.95)">Post</button>
+  </div>
+  <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding:16px 16px 20px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img src="https://i.pravatar.cc/160?img=47" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover">
+      <div><div style="font-size:15px;font-weight:600">Noor Haddad</div>
+        <button onClick="{{ cycleAud }}" style="margin-top:3px;height:26px;padding:0 10px;border-radius:8px;background:#EEF2FD;color:#2447AE;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:5px"><i class="{{ cv.audIcon }}"></i>{{ cv.aud }}<i class="ph ph-caret-down"></i></button></div>
+    </div>
+    <textarea value="{{ draft.text }}" onChange="{{ setDraft }}" placeholder="What's on your mind, Noor?" rows="5" style="width:100%;margin-top:14px;border:0;resize:none;font-size:{{ cv.fontSize }};line-height:1.4;letter-spacing:-0.01em;box-sizing:border-box;background:transparent"></textarea>
+    <sc-if value="{{ cv.hasUndo }}" hint-placeholder-val="{{ false }}"><button onClick="{{ undoPolish }}" style="font-size:13px;font-weight:600;color:#2F5BD3;display:flex;gap:5px;align-items:center;margin-bottom:10px"><i class="ph ph-arrow-counter-clockwise"></i>Undo AI edit</button></sc-if>
+    <sc-if value="{{ cv.hasPhoto }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;margin-bottom:14px;animation:hb-fade .35s ease">
+        <img src="{{ draft.photo }}" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;display:block;background:#E4E4E7">
+        <button onClick="{{ removePhoto }}" style="position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(24,24,27,.6);backdrop-filter:blur(10px);color:#fff;display:grid;place-items:center;font-size:16px"><i class="ph ph-x"></i></button>
+      </div>
+    </sc-if>
+    <div style="border-radius:20px;background:#F5F7FE;box-shadow:inset 0 0 0 1px #E1E8FB;padding:13px 14px">
+      <div style="display:flex;align-items:center;gap:8px"><i class="ph-fill ph-sparkle" style="color:#2F5BD3;font-size:17px"></i><span style="font-size:14px;font-weight:600">Polish with Harbor</span><span style="margin-left:auto;font-size:11.5px;color:#71717A">Only you see drafts</span></div>
+      <div style="display:flex;gap:8px;margin-top:11px">
+        <sc-for list="{{ tones }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.on }}" style="height:34px;padding:0 13px;border-radius:11px;background:#fff;box-shadow:inset 0 0 0 1px #DCE3F8;font-size:13.5px;font-weight:600;color:#2447AE;display:flex;align-items:center;gap:6px;opacity:{{ t.opacity }};transition:transform .2s" style-active="transform:scale(0.95)"><i class="{{ t.icon }}"></i>{{ t.label }}</button></sc-for>
+      </div>
+      <sc-if value="{{ cv.polishing }}" hint-placeholder-val="{{ false }}"><div style="margin-top:12px;height:10px;border-radius:5px;background:linear-gradient(90deg,#E4EAFA,#F8F9FE,#E4EAFA);background-size:480px 100%;animation:hb-shimmer 1.2s linear infinite"></div></sc-if>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px 34px;border-top:1px solid #F0F0F2">
+    <button onClick="{{ addPhoto }}" style="height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11.5px;font-weight:500;color:#3F3F46;border-radius:12px" style-active="background:#F4F4F5"><i class="ph ph-image-square" style="font-size:24px;color:#2F5BD3"></i>Photo</button>
+    <button onClick="{{ tagPeople }}" style="height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11.5px;font-weight:500;color:#3F3F46;border-radius:12px" style-active="background:#F4F4F5"><i class="ph ph-user-plus" style="font-size:24px"></i>Tag</button>
+    <button onClick="{{ addPlace }}" style="height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11.5px;font-weight:500;color:#3F3F46;border-radius:12px" style-active="background:#F4F4F5"><i class="ph ph-map-pin" style="font-size:24px"></i>Place</button>
+    <button onClick="{{ addPoll }}" style="height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11.5px;font-weight:500;color:#3F3F46;border-radius:12px" style-active="background:#F4F4F5"><i class="ph ph-chart-bar-horizontal" style="font-size:24px"></i>Poll</button>
+  </div>
+</div>
+</sc-if>
+
+<!-- 07 STORY -->
+<sc-if value="{{ is.story }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:#0B0B0C;animation:hb-fade .3s ease">
+  <img src="{{ sv.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.55) 0%,rgba(11,11,12,0) 22%,rgba(11,11,12,0) 70%,rgba(11,11,12,.6) 100%)"></div>
+  <button onClick="{{ prevStory }}" aria-label="Previous" style="position:absolute;left:0;top:110px;bottom:110px;width:35%"></button>
+  <button onClick="{{ nextStory }}" aria-label="Next" style="position:absolute;right:0;top:110px;bottom:110px;width:65%"></button>
+  <div style="position:absolute;top:54px;left:10px;right:10px;display:flex;gap:4px">
+    <sc-for list="{{ sv.bars }}" as="b" hint-placeholder-count="5"><span style="flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden"><span style="display:block;height:100%;background:#fff;transform-origin:left;transform:scaleX({{ b.v }})"></span></span></sc-for>
+  </div>
+  <div style="position:absolute;top:68px;left:12px;right:6px;display:flex;align-items:center;gap:10px;color:#fff">
+    <img src="{{ sv.a.av }}" alt="" style="width:36px;height:36px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(255,255,255,.9)">
+    <div style="flex:1"><span style="font-size:14.5px;font-weight:600">{{ sv.a.name }}</span><span style="font-size:13px;opacity:.75;margin-left:8px">{{ sv.time }}</span></div>
+    <button onClick="{{ back }}" style="width:40px;height:40px;display:grid;place-items:center;font-size:24px;color:#fff"><i class="ph ph-x"></i></button>
+  </div>
+  <div style="position:absolute;left:12px;right:12px;bottom:32px;display:flex;align-items:center;gap:10px">
+    <input value="{{ storyReply }}" onChange="{{ setStoryReply }}" onKeyDown="{{ storyKey }}" placeholder="{{ sv.placeholder }}" style="flex:1;height:44px;border-radius:22px;border:1.5px solid rgba(255,255,255,.55);background:rgba(255,255,255,.08);backdrop-filter:blur(10px);padding:0 18px;color:#fff;font-size:15px">
+    <button onClick="{{ likeStory }}" style="width:44px;height:44px;display:grid;place-items:center;font-size:26px;color:#fff;transition:transform .3s cubic-bezier(.34,1.56,.64,1)" style-active="transform:scale(0.85)"><i class="{{ sv.heart }}"></i></button>
+    <button onClick="{{ sendStoryReply }}" style="width:44px;height:44px;display:grid;place-items:center;font-size:24px;color:#fff"><i class="ph ph-paper-plane-tilt"></i></button>
+  </div>
+</div>
+</sc-if>
+
+<!-- 08 EXPLORE -->
+<sc-if value="{{ is.explore }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:50px 0 100px;box-sizing:border-box;animation:hb-fade .35s ease">
+  <div style="padding:10px 16px 0"><h1 style="margin:0;font-size:32px;font-weight:700;letter-spacing:-0.045em">Explore</h1></div>
+  <div style="margin:12px 16px 0;position:relative">
+    <i class="ph ph-magnifying-glass" style="position:absolute;left:14px;top:12px;font-size:19px;color:#71717A"></i>
+    <input value="{{ q }}" onChange="{{ setQ }}" placeholder="Search people, groups, posts" style="width:100%;height:44px;border-radius:14px;background:#F4F4F5;border:0;padding:0 16px 0 42px;font-size:15.5px;box-sizing:border-box">
+  </div>
+  <sc-if value="{{ ev.searching }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:18px 16px 0">
+      <div style="font-size:13px;font-weight:600;color:#71717A;letter-spacing:.02em;margin-bottom:6px">PEOPLE</div>
+      <sc-for list="{{ ev.people }}" as="u" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:12px;padding:9px 0;animation:hb-fade .3s ease">
+          <img src="{{ u.av }}" alt="" style="width:48px;height:48px;border-radius:50%;object-fit:cover">
+          <div style="flex:1"><div style="font-size:15px;font-weight:600">{{ u.name }}</div><div style="font-size:13px;color:#71717A">{{ u.mutualText }}</div></div>
+          <button onClick="{{ u.onAdd }}" style="height:34px;padding:0 14px;border-radius:11px;font-size:13.5px;font-weight:600;background:{{ u.bg }};color:{{ u.color }};transition:all .2s" style-active="transform:scale(0.95)">{{ u.label }}</button>
+        </div>
+      </sc-for>
+      <sc-if value="{{ ev.none }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:40px 12px;text-align:center"><i class="ph ph-magnifying-glass" style="font-size:34px;color:#D4D4D8"></i><div style="margin-top:10px;font-size:16px;font-weight:600">No one matches "{{ q }}"</div><div style="margin-top:4px;font-size:14px;color:#71717A">Try a first name, or search a group.</div></div>
+      </sc-if>
+    </div>
+  </sc-if>
+  <sc-if value="{{ ev.browsing }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:14px 16px 4px">
+      <sc-for list="{{ topics }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.on }}" style="flex:none;height:34px;padding:0 14px;border-radius:17px;font-size:13.5px;font-weight:600;background:{{ t.bg }};color:{{ t.color }};transition:all .2s">{{ t.label }}</button></sc-for>
+    </div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;padding:18px 16px 10px"><span style="font-size:18px;font-weight:600;letter-spacing:-0.02em">Groups for you</span><span style="font-size:14px;color:#2F5BD3;font-weight:600">See all</span></div>
+    <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 16px 4px;scroll-snap-type:x mandatory">
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+        <div style="flex:none;width:244px;border-radius:20px;overflow:hidden;box-shadow:inset 0 0 0 1px #E4E4E7;scroll-snap-align:start">
+          <img src="{{ g.img }}" alt="" style="width:100%;height:112px;object-fit:cover;display:block;background:#E4E4E7">
+          <div style="padding:11px 12px 12px;display:flex;align-items:center;gap:10px">
+            <div style="flex:1;min-width:0"><div style="font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ g.name }}</div><div style="font-size:12.5px;color:#71717A">{{ g.members }}</div></div>
+            <button onClick="{{ g.onJoin }}" style="height:32px;padding:0 13px;border-radius:10px;font-size:13px;font-weight:600;background:{{ g.bg }};color:{{ g.color }};transition:all .2s" style-active="transform:scale(0.95)">{{ g.label }}</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="padding:22px 16px 10px;font-size:18px;font-weight:600;letter-spacing:-0.02em">{{ ev.gridTitle }}</div>
+    <div style="column-count:2;column-gap:8px;padding:0 16px">
+      <sc-for list="{{ ev.grid }}" as="m" hint-placeholder-count="4"><div style="break-inside:avoid;margin-bottom:8px;position:relative;border-radius:16px;overflow:hidden"><img src="{{ m.src }}" alt="" style="width:100%;height:{{ m.h }};object-fit:cover;display:block;background:#E4E4E7"><span style="position:absolute;left:8px;bottom:8px;display:flex;align-items:center;gap:6px;padding:3px 8px 3px 3px;border-radius:999px;background:rgba(24,24,27,.5);backdrop-filter:blur(10px);color:#fff;font-size:11.5px;font-weight:600"><img src="{{ m.a.av }}" alt="" style="width:18px;height:18px;border-radius:50%">{{ m.a.first }}</span></div></sc-for>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<!-- 09 MESSAGES -->
+<sc-if value="{{ is.messages }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:50px 0 40px;box-sizing:border-box;background:#fff;animation:hb-push .45s cubic-bezier(.16,1,.3,1)">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px 0">
+    <button onClick="{{ back }}" style="width:44px;height:44px;display:grid;place-items:center;font-size:24px"><i class="ph ph-caret-left"></i></button>
+    <button onClick="{{ newChat }}" style="width:44px;height:44px;display:grid;place-items:center;font-size:22px"><i class="ph ph-note-pencil"></i></button>
+  </div>
+  <h1 style="margin:0;padding:0 16px;font-size:32px;font-weight:700;letter-spacing:-0.045em">Messages</h1>
+  <div style="margin:12px 16px 0;position:relative"><i class="ph ph-magnifying-glass" style="position:absolute;left:14px;top:12px;font-size:19px;color:#71717A"></i><input placeholder="Search messages" style="width:100%;height:44px;border-radius:14px;background:#F4F4F5;border:0;padding:0 16px 0 42px;font-size:15.5px;box-sizing:border-box"></div>
+  <div style="display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding:18px 16px 8px">
+    <sc-for list="{{ activeNow }}" as="u" hint-placeholder-count="5"><button onClick="{{ u.open }}" style="flex:none;width:62px;display:flex;flex-direction:column;align-items:center;gap:6px"><span style="position:relative"><img src="{{ u.av }}" alt="" style="width:58px;height:58px;border-radius:50%;object-fit:cover;display:block"><span style="position:absolute;right:1px;bottom:1px;width:15px;height:15px;border-radius:50%;background:#22C55E;border:3px solid #fff;box-sizing:border-box"></span></span><span style="font-size:12px;color:#3F3F46">{{ u.first }}</span></button></sc-for>
+  </div>
+  <div style="padding:6px 0">
+    <sc-for list="{{ chatList }}" as="c" hint-placeholder-count="4">
+      <button onClick="{{ c.open }}" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px 16px;text-align:left;transition:background .15s" style-active="background:#F4F4F5">
+        <img src="{{ c.a.av }}" alt="" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none">
+        <span style="flex:1;min-width:0"><span style="display:block;font-size:15.5px;font-weight:{{ c.weight }}">{{ c.a.name }}</span><span style="display:block;font-size:14px;color:{{ c.color }};font-weight:{{ c.weight }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.last }} · {{ c.time }}</span></span>
+        <sc-if value="{{ c.unread }}" hint-placeholder-val="{{ false }}"><span style="width:10px;height:10px;border-radius:50%;background:#2F5BD3;flex:none"></span></sc-if>
+      </button>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<!-- 10 CHAT -->
+<sc-if value="{{ is.chat }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:#fff;animation:hb-push .45s cubic-bezier(.16,1,.3,1)">
+  <div ref="{{ chatScroll }}" style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:112px 14px 150px;box-sizing:border-box;display:flex;flex-direction:column;gap:5px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 0 18px"><img src="{{ ch.a.av }}" alt="" style="width:72px;height:72px;border-radius:50%;object-fit:cover"><div style="font-size:17px;font-weight:600">{{ ch.a.name }}</div><div style="font-size:13px;color:#71717A">Friends since 2021 · {{ ch.a.mutual }} mutual friends</div></div>
+    <div style="text-align:center;font-size:12px;color:#A1A1AA;padding:4px 0 8px">Today 9:02 AM</div>
+    <sc-for list="{{ ch.msgs }}" as="m" hint-placeholder-count="3"><div style="display:flex;justify-content:{{ m.justify }}"><div style="max-width:76%;padding:9px 14px;border-radius:{{ m.radius }};background:{{ m.bg }};color:{{ m.color }};font-size:15px;line-height:1.38;text-wrap:pretty;animation:hb-fade .3s ease">{{ m.t }}</div></div></sc-for>
+    <sc-if value="{{ typing }}" hint-placeholder-val="{{ false }}"><div style="display:flex"><div style="padding:13px 15px;border-radius:20px 20px 20px 6px;background:#F4F4F5;display:flex;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:#71717A;animation:hb-dot 1.2s infinite"></span><span style="width:7px;height:7px;border-radius:50%;background:#71717A;animation:hb-dot 1.2s .15s infinite"></span><span style="width:7px;height:7px;border-radius:50%;background:#71717A;animation:hb-dot 1.2s .3s infinite"></span></div></div></sc-if>
+  </div>
+  <div style="position:absolute;top:0;left:0;right:0;z-index:20;height:104px;padding:50px 8px 0;box-sizing:border-box;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:0 1px 0 rgba(24,24,27,.05)">
+    <button onClick="{{ back }}" style="width:40px;height:44px;display:grid;place-items:center;font-size:24px"><i class="ph ph-caret-left"></i></button>
+    <span style="position:relative"><img src="{{ ch.a.av }}" alt="" style="width:38px;height:38px;border-radius:50%;object-fit:cover;display:block"><span style="position:absolute;right:0;bottom:0;width:12px;height:12px;border-radius:50%;background:#22C55E;border:2px solid #fff;box-sizing:border-box"></span></span>
+    <div style="flex:1;padding-left:4px"><div style="font-size:16px;font-weight:600">{{ ch.a.first }}</div><div style="font-size:12.5px;color:#71717A">Active now</div></div>
+    <button onClick="{{ callToast }}" style="width:40px;height:40px;display:grid;place-items:center;font-size:22px;color:#2F5BD3"><i class="ph ph-phone"></i></button>
+    <button onClick="{{ callToast }}" style="width:40px;height:40px;display:grid;place-items:center;font-size:23px;color:#2F5BD3"><i class="ph ph-video-camera"></i></button>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:0;z-index:20;padding:8px 12px 30px;background:rgba(255,255,255,.88);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%)">
+    <sc-if value="{{ ch.showReplies }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:9px;align-items:center">
+        <i class="ph-fill ph-sparkle" style="color:#2F5BD3;font-size:15px;flex:none"></i>
+        <sc-for list="{{ ch.replies }}" as="r" hint-placeholder-count="3"><button onClick="{{ r.on }}" style="flex:none;height:32px;padding:0 13px;border-radius:16px;box-shadow:inset 0 0 0 1px #DCE3F8;background:#F5F7FE;color:#2447AE;font-size:13.5px;font-weight:500;transition:transform .2s" style-active="transform:scale(0.95)">{{ r.t }}</button></sc-for>
+      </div>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button onClick="{{ addPhotoChat }}" style="width:38px;height:38px;display:grid;place-items:center;font-size:23px;color:#2F5BD3"><i class="ph ph-image-square"></i></button>
+      <input value="{{ chatDraft }}" onChange="{{ setChatDraft }}" onKeyDown="{{ chatKey }}" placeholder="Message" style="flex:1;height:40px;border-radius:20px;background:#F4F4F5;border:0;padding:0 16px;font-size:15px">
+      <button onClick="{{ sendChat }}" style="width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:19px;color:#fff;background:{{ chatSendBg }};transition:background .2s,transform .2s" style-active="transform:scale(0.9)"><i class="ph-fill ph-paper-plane-right"></i></button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- 11 NOTIFICATIONS -->
+<sc-if value="{{ is.notifications }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:50px 0 40px;box-sizing:border-box;background:#fff;animation:hb-push .45s cubic-bezier(.16,1,.3,1)">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px 0">
+    <button onClick="{{ back }}" style="width:44px;height:44px;display:grid;place-items:center;font-size:24px"><i class="ph ph-caret-left"></i></button>
+    <button onClick="{{ markAll }}" style="height:44px;padding:0 10px;font-size:14.5px;font-weight:600;color:#2F5BD3">Mark all read</button>
+  </div>
+  <h1 style="margin:0;padding:0 16px;font-size:32px;font-weight:700;letter-spacing:-0.045em">Notifications</h1>
+  <sc-if value="{{ set.brief }}" hint-placeholder-val="{{ true }}">
+    <div style="margin:14px 16px 4px;display:flex;gap:10px;padding:12px 14px;border-radius:18px;background:#F5F7FE;box-shadow:inset 0 0 0 1px #E1E8FB;font-size:14px;line-height:1.42;color:#27272A;text-wrap:pretty"><i class="ph-fill ph-sparkle" style="color:#2F5BD3;font-size:17px;flex:none;margin-top:1px"></i><span>25 reactions on your Maple Pass photo, a dinner invite from Hana for Sunday, and one friend request from Yusuf.</span></div>
+  </sc-if>
+  <div style="padding:16px 16px 6px;font-size:17px;font-weight:600;letter-spacing:-0.02em">New</div>
+  <sc-for list="{{ notifNew }}" as="n" hint-placeholder-count="3">
+    <div style="display:flex;gap:12px;padding:10px 16px;background:{{ n.bg }};transition:background .4s">
+      <span style="position:relative;flex:none;height:54px"><img src="{{ n.a.av }}" alt="" style="width:54px;height:54px;border-radius:50%;object-fit:cover;display:block"><span style="position:absolute;right:-3px;bottom:-3px;width:24px;height:24px;border-radius:50%;background:#2F5BD3;border:2.5px solid #fff;display:grid;place-items:center;box-sizing:border-box"><i class="{{ n.icon }}" style="color:#fff;font-size:12px"></i></span></span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14.5px;line-height:1.4;color:#27272A;text-wrap:pretty"><b style="font-weight:600;color:#18181B">{{ n.a.name }}</b> {{ n.text }}</div>
+        <div style="font-size:12.5px;margin-top:2px;color:{{ n.timeColor }};font-weight:500">{{ n.time }}</div>
+        <sc-if value="{{ n.showActions }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:8px;margin-top:9px"><button onClick="{{ n.onConfirm }}" style="flex:1;height:36px;border-radius:11px;background:#2F5BD3;color:#fff;font-size:14px;font-weight:600" style-active="transform:scale(0.97)">Confirm</button><button onClick="{{ n.onDelete }}" style="flex:1;height:36px;border-radius:11px;background:#F4F4F5;font-size:14px;font-weight:600" style-active="transform:scale(0.97)">Delete</button></div></sc-if>
+      </div>
+    </div>
+  </sc-for>
+  <div style="padding:18px 16px 6px;font-size:17px;font-weight:600;letter-spacing:-0.02em">Earlier</div>
+  <sc-for list="{{ notifOld }}" as="n" hint-placeholder-count="3">
+    <div style="display:flex;gap:12px;padding:10px 16px">
+      <span style="position:relative;flex:none;height:54px"><img src="{{ n.a.av }}" alt="" style="width:54px;height:54px;border-radius:50%;object-fit:cover;display:block"><span style="position:absolute;right:-3px;bottom:-3px;width:24px;height:24px;border-radius:50%;background:#2F5BD3;border:2.5px solid #fff;display:grid;place-items:center;box-sizing:border-box"><i class="{{ n.icon }}" style="color:#fff;font-size:12px"></i></span></span>
+      <div style="flex:1;min-width:0"><div style="font-size:14.5px;line-height:1.4;color:#27272A;text-wrap:pretty"><b style="font-weight:600;color:#18181B">{{ n.a.name }}</b> {{ n.text }}</div><div style="font-size:12.5px;margin-top:2px;color:#71717A;font-weight:500">{{ n.time }}</div></div>
+    </div>
+  </sc-for>
+</div>
+</sc-if>
+
+<!-- 12 BRIEF (AI) -->
+<sc-if value="{{ is.brief }}" hint-placeholder-val="{{ false }}">
+<div ref="{{ briefScroll }}" style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:50px 0 104px;box-sizing:border-box;animation:hb-fade .35s ease">
+  <div style="padding:10px 16px 0;display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:12px;background:#2F5BD3;display:grid;place-items:center"><i class="ph-fill ph-sparkle" style="color:#fff;font-size:20px"></i></span><h1 style="margin:0;font-size:32px;font-weight:700;letter-spacing:-0.045em">Brief</h1></div>
+  <p style="margin:8px 16px 0;font-size:14px;color:#71717A">Updated 8 min ago from 23 posts, 6 messages and 11 notifications.</p>
+  <div style="margin:16px 16px 0;position:relative;display:grid;grid-template-columns:1fr 1fr;height:38px;padding:3px;border-radius:12px;background:#F4F4F5;box-sizing:border-box">
+    <span style="position:absolute;top:3px;left:3px;width:calc(50% - 3px);height:32px;border-radius:9px;background:#fff;box-shadow:0 1px 3px rgba(24,24,27,.12);transform:translateX({{ segX }});transition:transform .45s cubic-bezier(.16,1,.3,1)"></span>
+    <button onClick="{{ rangeToday }}" style="position:relative;font-size:14px;font-weight:600">Today</button>
+    <button onClick="{{ rangeWeek }}" style="position:relative;font-size:14px;font-weight:600">This week</button>
+  </div>
+  <div style="padding:22px 16px 8px;font-size:13px;font-weight:600;color:#71717A;letter-spacing:.03em">WHAT YOU MISSED</div>
+  <div style="margin:0 16px;border-radius:20px;box-shadow:inset 0 0 0 1px #E4E4E7;overflow:hidden">
+    <sc-for list="{{ bv.items }}" as="b" hint-placeholder-count="3">
+      <button onClick="{{ b.open }}" style="width:100%;display:flex;gap:12px;align-items:flex-start;padding:13px 14px;text-align:left;border-bottom:1px solid #F0F0F2;animation:hb-fade .35s ease" style-active="background:#FAFAFA"><img src="{{ b.a.av }}" alt="" style="width:30px;height:30px;border-radius:50%;object-fit:cover;flex:none"><span style="flex:1;font-size:14.5px;line-height:1.42;color:#27272A;text-wrap:pretty">{{ b.text }}</span><i class="ph ph-caret-right" style="color:#A1A1AA;margin-top:6px"></i></button>
+    </sc-for>
+  </div>
+  <div style="padding:22px 16px 8px;font-size:13px;font-weight:600;color:#71717A;letter-spacing:.03em">COMING UP</div>
+  <div style="margin:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <div style="padding:14px;border-radius:18px;background:#F4F4F5"><i class="ph ph-cake" style="font-size:22px;color:#2F5BD3"></i><div style="margin-top:10px;font-size:14.5px;font-weight:600;line-height:1.3">Hana's birthday</div><div style="font-size:13px;color:#71717A;margin-top:2px">Sunday, Sep 27</div></div>
+    <div style="padding:14px;border-radius:18px;background:#F4F4F5"><i class="ph ph-clipboard-text" style="font-size:22px;color:#2F5BD3"></i><div style="margin-top:10px;font-size:14.5px;font-weight:600;line-height:1.3">Library survey closes</div><div style="font-size:13px;color:#71717A;margin-top:2px">Wed, Sep 30 · Tomasz</div></div>
+  </div>
+  <div style="padding:22px 16px 8px;font-size:13px;font-weight:600;color:#71717A;letter-spacing:.03em">WAITING ON YOU</div>
+  <div style="margin:0 16px;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;box-shadow:inset 0 0 0 1px #E4E4E7">
+    <img src="https://i.pravatar.cc/160?img=15" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
+    <div style="flex:1;font-size:14px;line-height:1.4;color:#27272A">Mateo asked if Saturday still works for the studio visit.</div>
+    <button onClick="{{ replyMateo }}" style="height:34px;padding:0 14px;border-radius:11px;background:#2F5BD3;color:#fff;font-size:13.5px;font-weight:600" style-active="transform:scale(0.95)">Reply</button>
+  </div>
+  <div style="padding:26px 16px 8px;display:flex;align-items:center;gap:8px"><span style="font-size:18px;font-weight:600;letter-spacing:-0.02em">Ask Harbor</span><span style="font-size:12px;color:#71717A">Uses only posts shared with you</span></div>
+  <div style="display:flex;flex-direction:column;gap:8px;padding:0 16px">
+    <sc-for list="{{ askThread }}" as="m" hint-placeholder-count="0"><div style="display:flex;justify-content:{{ m.justify }};animation:hb-fade .3s ease"><div style="max-width:84%;padding:10px 14px;border-radius:{{ m.radius }};background:{{ m.bg }};font-size:14.5px;line-height:1.45;color:#27272A;text-wrap:pretty">{{ m.t }}</div></div></sc-for>
+    <sc-if value="{{ askLoading }}" hint-placeholder-val="{{ false }}"><div style="width:70%;padding:14px;border-radius:18px 18px 18px 6px;background:#F5F7FE;display:flex;flex-direction:column;gap:7px"><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,#E4EAFA,#F8F9FE,#E4EAFA);background-size:480px 100%;animation:hb-shimmer 1.2s linear infinite"></div><div style="height:10px;width:60%;border-radius:5px;background:linear-gradient(90deg,#E4EAFA,#F8F9FE,#E4EAFA);background-size:480px 100%;animation:hb-shimmer 1.2s linear infinite"></div></div></sc-if>
+  </div>
+  <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 16px">
+    <sc-for list="{{ askSuggest }}" as="a" hint-placeholder-count="3"><button onClick="{{ a.on }}" style="flex:none;height:34px;padding:0 13px;border-radius:17px;box-shadow:inset 0 0 0 1px #DCE3F8;background:#F5F7FE;color:#2447AE;font-size:13.5px;font-weight:500" style-active="transform:scale(0.96)">{{ a.t }}</button></sc-for>
+  </div>
+  <div style="margin:0 16px;display:flex;align-items:center;gap:8px;padding:5px 5px 5px 16px;border-radius:22px;background:#F4F4F5">
+    <input value="{{ askDraft }}" onChange="{{ setAskDraft }}" onKeyDown="{{ askKey }}" placeholder="Ask about your friends' posts…" style="flex:1;height:36px;border:0;background:transparent;font-size:15px">
+    <button onClick="{{ askSend }}" style="width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:{{ askSendBg }};color:#fff;font-size:17px;transition:background .2s"><i class="ph ph-arrow-up"></i></button>
+  </div>
+  <p style="margin:12px 16px 0;font-size:12px;line-height:1.45;color:#A1A1AA">Harbor Brief is generated by AI and can get details wrong. It never reads private messages you haven't opened.</p>
+</div>
+</sc-if>
+
+<!-- 13 PROFILE -->
+<sc-if value="{{ is.profile }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding-bottom:100px;box-sizing:border-box;animation:hb-fade .35s ease">
+  <div style="position:relative;height:210px">
+    <img src="https://picsum.photos/seed/hb-rotterdam-cover/800/440" alt="" style="width:100%;height:100%;object-fit:cover;display:block;background:#D4D4D8">
+    <span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,24,27,.35),rgba(24,24,27,0) 45%)"></span>
+    <button onClick="{{ toSettings }}" style="position:absolute;top:52px;right:14px;width:38px;height:38px;border-radius:50%;background:rgba(24,24,27,.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;display:grid;place-items:center;font-size:20px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)"><i class="ph ph-gear-six"></i></button>
+  </div>
+  <div style="padding:0 16px">
+    <img src="https://i.pravatar.cc/300?img=47" alt="" style="width:104px;height:104px;border-radius:50%;object-fit:cover;border:4px solid #fff;margin-top:-54px;position:relative;display:block;background:#E4E4E7">
+    <h1 style="margin:10px 0 0;font-size:26px;font-weight:700;letter-spacing:-0.035em">Noor Haddad</h1>
+    <div style="font-size:14px;color:#71717A;margin-top:2px">@noorhaddad · Rotterdam</div>
+    <p style="margin:10px 0 0;font-size:15px;line-height:1.45;color:#27272A">Architect. Mostly bridges, bread, and long walks along the Maas.</p>
+    <div style="display:flex;gap:18px;margin-top:12px;font-size:14px;color:#52525B"><span><b style="color:#18181B;font-weight:600">482</b> friends</span><span><b style="color:#18181B;font-weight:600">131</b> posts</span><span><b style="color:#18181B;font-weight:600">36</b> albums</span></div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button onClick="{{ editProfile }}" style="flex:1;height:40px;border-radius:12px;background:#2F5BD3;color:#fff;font-size:14.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px" style-active="transform:scale(0.97)"><i class="ph ph-pencil-simple"></i>Edit profile</button>
+      <button onClick="{{ shareProfile }}" style="flex:1;height:40px;border-radius:12px;background:#F4F4F5;font-size:14.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px" style-active="transform:scale(0.97)"><i class="ph ph-share-network"></i>Share</button>
+    </div>
+  </div>
+  <div style="position:relative;display:grid;grid-template-columns:repeat(3,1fr);margin-top:18px;border-bottom:1px solid #F0F0F2">
+    <sc-for list="{{ ptabs }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.on }}" style="height:46px;font-size:14.5px;font-weight:600;color:{{ t.color }};transition:color .2s">{{ t.label }}</button></sc-for>
+    <span style="position:absolute;bottom:-1px;left:0;width:33.333%;height:2.5px;display:flex;justify-content:center;transform:translateX({{ ptabX }});transition:transform .45s cubic-bezier(.16,1,.3,1)"><span style="width:48px;height:100%;border-radius:2px;background:#2F5BD3"></span></span>
+  </div>
+  <sc-if value="{{ pv.posts }}" hint-placeholder-val="{{ false }}">
+    <sc-for list="{{ myPosts }}" as="m" hint-placeholder-count="2">
+      <div style="padding:14px 16px;border-bottom:8px solid #F4F4F5;animation:hb-fade .3s ease">
+        <div style="font-size:13px;color:#71717A">{{ m.time }}</div>
+        <p style="margin:6px 0 10px;font-size:15px;line-height:1.45">{{ m.text }}</p>
+        <img src="{{ m.img }}" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;display:block;background:#E4E4E7">
+        <div style="display:flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;color:#71717A"><i class="ph-fill ph-heart" style="color:#2F5BD3"></i>{{ m.likes }} · {{ m.comments }} comments</div>
+      </div>
+    </sc-for>
+  </sc-if>
+  <sc-if value="{{ pv.photos }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding-top:2px;animation:hb-fade .3s ease">
+      <sc-for list="{{ myPhotos }}" as="ph" hint-placeholder-count="6"><img src="{{ ph }}" alt="" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#E4E4E7"></sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{ pv.about }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:8px 16px;animation:hb-fade .3s ease">
+      <sc-for list="{{ about }}" as="r" hint-placeholder-count="4"><div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #F0F0F2;font-size:15px"><i class="{{ r.icon }}" style="font-size:22px;color:#52525B"></i>{{ r.t }}</div></sc-for>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<!-- 14 SETTINGS -->
+<sc-if value="{{ is.settings }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;padding:50px 0 40px;box-sizing:border-box;background:#F4F4F5;animation:hb-push .45s cubic-bezier(.16,1,.3,1)">
+  <div style="padding:4px 8px 0"><button onClick="{{ back }}" style="width:44px;height:44px;display:grid;place-items:center;font-size:24px"><i class="ph ph-caret-left"></i></button></div>
+  <h1 style="margin:0;padding:0 16px;font-size:32px;font-weight:700;letter-spacing:-0.045em">Menu</h1>
+  <button onClick="{{ toProfile }}" style="margin:14px 16px 0;width:calc(100% - 32px);display:flex;align-items:center;gap:12px;padding:12px;border-radius:18px;background:#fff;text-align:left" style-active="transform:scale(0.99)">
+    <img src="https://i.pravatar.cc/160?img=47" alt="" style="width:50px;height:50px;border-radius:50%;object-fit:cover">
+    <span style="flex:1"><span style="display:block;font-size:16px;font-weight:600">Noor Haddad</span><span style="display:block;font-size:13.5px;color:#71717A">See your profile</span></span><i class="ph ph-caret-right" style="color:#A1A1AA"></i>
+  </button>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 16px 0">
+    <sc-for list="{{ shortcuts }}" as="s" hint-placeholder-count="6"><button onClick="{{ s.on }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:14px;border-radius:18px;background:#fff;text-align:left;transition:transform .2s" style-active="transform:scale(0.97)"><i class="{{ s.icon }}" style="font-size:24px;color:#2F5BD3"></i><span style="font-size:15px;font-weight:600">{{ s.label }}</span></button></sc-for>
+  </div>
+  <div style="padding:22px 28px 8px;font-size:13px;font-weight:600;color:#71717A;letter-spacing:.03em">HARBOR AI</div>
+  <div style="margin:0 16px;border-radius:18px;background:#fff;overflow:hidden">
+    <sc-for list="{{ aiToggles }}" as="t" hint-placeholder-count="4">
+      <button onClick="{{ t.on }}" style="width:100%;display:flex;align-items:center;gap:12px;padding:13px 14px;text-align:left;border-bottom:1px solid #F0F0F2">
+        <span style="flex:1"><span style="display:block;font-size:15px;font-weight:500">{{ t.label }}</span><span style="display:block;font-size:13px;color:#71717A;margin-top:1px;line-height:1.35">{{ t.sub }}</span></span>
+        <span style="flex:none;width:51px;height:31px;border-radius:16px;background:{{ t.bg }};position:relative;transition:background .25s"><span style="position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 3px 8px rgba(24,24,27,.18),0 1px 1px rgba(24,24,27,.1);transform:translateX({{ t.x }});transition:transform .4s cubic-bezier(.34,1.3,.64,1)"></span></span>
+      </button>
+    </sc-for>
+  </div>
+  <div style="padding:22px 28px 8px;font-size:13px;font-weight:600;color:#71717A;letter-spacing:.03em">PRIVACY</div>
+  <div style="margin:0 16px;border-radius:18px;background:#fff;overflow:hidden">
+    <div style="display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #F0F0F2;font-size:15px"><i class="ph ph-users" style="font-size:21px;color:#52525B"></i><span style="flex:1">Default audience</span><span style="color:#71717A">Friends</span><i class="ph ph-caret-right" style="color:#A1A1AA"></i></div>
+    <div style="display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #F0F0F2;font-size:15px"><i class="ph ph-prohibit" style="font-size:21px;color:#52525B"></i><span style="flex:1">Blocked accounts</span><span style="color:#71717A">2</span><i class="ph ph-caret-right" style="color:#A1A1AA"></i></div>
+    <div style="display:flex;align-items:center;gap:12px;padding:14px;font-size:15px"><i class="ph ph-download-simple" style="font-size:21px;color:#52525B"></i><span style="flex:1">Download your data</span><i class="ph ph-caret-right" style="color:#A1A1AA"></i></div>
+  </div>
+  <button onClick="{{ logout }}" style="margin:22px 16px 0;width:calc(100% - 32px);height:50px;border-radius:16px;background:#fff;color:#DC2626;font-size:15.5px;font-weight:600" style-active="transform:scale(0.98)">Log out</button>
+</div>
+</sc-if>
+
+<!-- TAB BAR -->
+<sc-if value="{{ showTabs }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:0;right:0;bottom:0;height:140px;z-index:29;pointer-events:none;backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);-webkit-mask-image:linear-gradient(0deg,#000 0%,#000 45%,transparent 100%);mask-image:linear-gradient(0deg,#000 0%,#000 45%,transparent 100%)"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:140px;z-index:29;pointer-events:none;background:linear-gradient(0deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.5) 55%,rgba(255,255,255,0) 100%)"></div>
+<div style="position:absolute;left:16px;right:16px;bottom:30px;z-index:30;display:flex;align-items:center;gap:10px">
+  <div style="flex:1;height:62px;border-radius:31px;background:#18181B;display:flex;align-items:center;padding:7px;gap:2px;box-shadow:0 18px 36px -16px rgba(24,24,27,.5),inset 0 1px 0 rgba(255,255,255,.08)">
+    <sc-for list="{{ tabList }}" as="t" hint-placeholder-count="4">
+      <button onClick="{{ t.go }}" aria-label="{{ t.label }}" style="height:48px;border-radius:24px;padding:0 {{ t.pad }};background:{{ t.bg }};color:{{ t.color }};display:flex;align-items:center;gap:8px;transition:all .45s cubic-bezier(.16,1,.3,1)" style-active="transform:scale(0.94)">
+        <sc-if value="{{ t.isAvatar }}" hint-placeholder-val="{{ false }}"><img src="https://i.pravatar.cc/80?img=47" alt="" style="width:26px;height:26px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px {{ t.ring }}"></sc-if>
+        <sc-if value="{{ t.isIcon }}" hint-placeholder-val="{{ true }}"><i class="{{ t.cls }}" style="font-size:23px"></i></sc-if>
+        <sc-if value="{{ t.on }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;white-space:nowrap">{{ t.label }}</span></sc-if>
+      </button>
+    </sc-for>
+  </div>
+  <button onClick="{{ toCreate }}" aria-label="Create post" style="width:62px;height:62px;border-radius:31px;background:#2F5BD3;color:#FFFFFF;display:grid;place-items:center;font-size:26px;box-shadow:0 18px 36px -14px rgba(47,91,211,.7),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .25s cubic-bezier(.34,1.56,.64,1)" style-active="transform:scale(0.9) rotate(90deg)"><i class="ph ph-plus"></i></button>
+</div>
+</sc-if>
+
+<!-- STATUS BAR / ISLAND / TOAST / HOME INDICATOR -->
+<div style="position:absolute;top:0;left:0;right:0;height:50px;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 40px;box-sizing:border-box;color:{{ sbColor }};pointer-events:none;transition:color .3s">
+  <span style="font-size:16px;font-weight:600;letter-spacing:-0.01em">9:41</span>
+  <span style="display:flex;gap:5px;align-items:center;font-size:17px"><i class="ph-fill ph-cell-signal-full"></i><i class="ph ph-wifi-high"></i><i class="ph-fill ph-battery-full" style="font-size:22px"></i></span>
+</div>
+<div style="position:absolute;top:11px;left:50%;transform:translateX(-50%);width:122px;height:35px;border-radius:20px;background:#0B0B0C;z-index:41"></div>
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:50%;bottom:{{ toastBottom }};z-index:45;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:16px;background:rgba(24,24,27,.9);backdrop-filter:blur(14px);color:#fff;font-size:14px;font-weight:500;white-space:nowrap;box-shadow:0 12px 30px -10px rgba(24,24,27,.5),inset 0 1px 0 rgba(255,255,255,.1);animation:hb-toast .45s cubic-bezier(.16,1,.3,1)"><i class="ph-fill ph-check-circle" style="font-size:18px;color:#8FB0FF"></i>{{ toast }}</div>
+</sc-if>
+<div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:{{ hiColor }};z-index:50;pointer-events:none"></div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:410,&quot;height&quot;:864},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;onboarding&quot;,&quot;login&quot;,&quot;register&quot;,&quot;feed&quot;,&quot;post&quot;,&quot;create&quot;,&quot;story&quot;,&quot;explore&quot;,&quot;messages&quot;,&quot;chat&quot;,&quot;notifications&quot;,&quot;brief&quot;,&quot;profile&quot;,&quot;settings&quot;],&quot;default&quot;:&quot;onboarding&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  P = {
+    me:{name:'Noor Haddad',first:'Noor',av:'https://i.pravatar.cc/160?img=47'},
+    ines:{name:'Ines Okafor-Lind',first:'Ines',av:'https://i.pravatar.cc/160?img=32',mutual:14},
+    tomasz:{name:'Tomasz Wierzbicki',first:'Tomasz',av:'https://i.pravatar.cc/160?img=12',mutual:6},
+    priya:{name:'Priya Raghunathan',first:'Priya',av:'https://i.pravatar.cc/160?img=45',mutual:22},
+    mateo:{name:'Mateo Arriaga',first:'Mateo',av:'https://i.pravatar.cc/160?img=15',mutual:9},
+    hana:{name:'Hana Sørensen',first:'Hana',av:'https://i.pravatar.cc/160?img=5',mutual:31},
+    kofi:{name:'Kofi Mensah-Boateng',first:'Kofi',av:'https://i.pravatar.cc/160?img=53',mutual:11},
+    delphine:{name:'Delphine Aubert',first:'Delphine',av:'https://i.pravatar.cc/160?img=44',mutual:8},
+    yusuf:{name:'Yusuf Karaca',first:'Yusuf',av:'https://i.pravatar.cc/160?img=59',mutual:9},
+    wren:{name:'Wren Castellanos',first:'Wren',av:'https://i.pravatar.cc/160?img=26',mutual:4},
+  };
+  stories = [{who:'ines',seed:'hb-st-lisbon',time:'38m'},{who:'priya',seed:'hb-st-larch',time:'2h'},{who:'mateo',seed:'hb-st-clay',time:'4h'},{who:'hana',seed:'hb-st-dinner',time:'6h'},{who:'kofi',seed:'hb-st-accra',time:'9h'}];
+  commentRef = React.createRef();
+  chatScroll = React.createRef();
+  briefScroll = React.createRef();
+  state = this.init();
+
+  pic(seed,w,h){ return 'https://picsum.photos/seed/'+seed+'/'+(w||800)+'/'+(h||600); }
+  init(){
+    const pic=(a,b,c)=>this.pic(a,b,c);
+    const c=(who,text,time,likes)=>({id:Math.random().toString(36).slice(2),who,text,time,likes:likes||0,liked:false});
+    return {
+      screen:this.props.screen||'onboarding', stack:[], ob:0,
+      login:{email:'',pw:'',show:false,err:{},loading:false},
+      reg:{name:'',email:'',pw:'',agree:false,err:{},loading:false},
+      posts:[
+        {id:'p1',who:'ines',time:'42m',place:'Lisbon',text:'Third attempt at pastéis de nata from scratch and the lamination finally held. Butter ratios are in the comments for everyone who asked.',imgs:[pic('hb-nata-lisbon',900,675)],ratio:'4/3',likes:214,liked:false,comments:38,shares:6},
+        {id:'p2',who:'tomasz',time:'1h',place:'Kraków',text:'Our neighborhood library is extending Saturday hours starting October 3. If you use the reading room, the city survey on the new schedule closes Wednesday.',imgs:[],likes:87,liked:true,comments:19,shares:24},
+        {id:'p3',who:'priya',time:'3h',place:'North Cascades',text:'Maple Pass Loop. 14.3 km, 820 m of gain, and one very judgmental marmot.',imgs:[pic('hb-cascade-larch',720,900),pic('hb-cascade-ridge',720,900),pic('hb-cascade-lake',720,900)],ratio:'4/5',likes:1208,liked:false,comments:142,shares:31},
+        {id:'p4',who:'mateo',time:'Yesterday',place:'Oaxaca',text:'The studio is finally done. Six months, one very patient landlord, and more clay dust than I will ever admit to.',imgs:[pic('hb-clay-studio',900,675)],ratio:'4/3',likes:356,liked:false,comments:47,shares:3},
+      ],
+      pid:'p1',
+      comments:{
+        p1:[c('kofi','Butter ratio please. Mine always leaks in the oven.','18m',12),c('ines','250 g cold butter per 500 g flour. Three folds, 20 minutes in the fridge between each.','15m',41),c('delphine','A marble slab changed everything for me. Worth it if you bake more than twice a year.','11m',7),c('yusuf','Tried this last weekend and mine looked like scrambled eggs in a cup. Going again Saturday.','6m',3)],
+        p2:[c('hana','Thank you for flagging this. Filled it in.','40m',5),c('wren','Do the Sunday hours change too?','32m',1),c('tomasz','Sunday stays the same, 10 to 4.','28m',4)],
+        p3:[c('kofi','Which trailhead did you start from?','2h',6),c('priya','Rainy Pass. Go counter-clockwise, the views open up faster.','2h',18),c('delphine','The larches in two weeks will be unreal.','1h',9)],
+        p4:[c('priya','Mateo!! It looks incredible.','20h',4),c('hana','Are you running weekend classes?','18h',11),c('mateo','Starting November. Four people per class.','17h',14)],
+      },
+      cSum:{
+        p1:'Most commenters want the butter ratio. Ines answered in the thread: 250 g of cold butter per 500 g of flour, three folds, chilled between each. Others recommend a marble slab.',
+        p2:'People are thanking Tomasz and filling in the survey. Sunday hours stay the same, 10 AM to 4 PM.',
+        p3:'Friends are asking about the route. Priya started at Rainy Pass and suggests going counter-clockwise; the larches peak in about two weeks.',
+        p4:'Friends are congratulating Mateo on the studio. Weekend classes start in November with four people per class.',
+      },
+      cSumLoading:false, cDraft:'',
+      brief:[
+        {who:'ines',text:'Ines posted her pastéis de nata recipe. Most of the 38 comments ask about the butter ratio.'},
+        {who:'tomasz',text:'Tomasz shared a library survey on new Saturday hours. It closes Wednesday.'},
+        {who:'priya',text:"Priya's Maple Pass hike is the most-liked post among your friends today."},
+      ],
+      briefLoading:false, briefOpen:true,
+      draft:{text:'',photo:null,aud:0}, prevText:null, polishing:null,
+      chats:{
+        c1:{who:'mateo',time:'9:14',unread:true,msgs:[{me:false,t:'The studio is finally painted. Want to come see it Saturday?'},{me:true,t:'Yes! What time works?'},{me:false,t:"Anytime after 2. I'll have coffee and questionable music."}],replies:['Saturday at 3 works','Send me the address','Can I bring Kofi?']},
+        c2:{who:'hana',time:'Tue',unread:false,msgs:[{me:false,t:'Sunday dinner at mine, you in?'}],replies:["I'm in",'What can I bring?','Can we do 7?']},
+        c3:{who:'kofi',time:'Mon',unread:false,msgs:[{me:false,t:'Photos from Accra incoming'}],replies:['Send them!','How is the new flat?']},
+        c4:{who:'delphine',time:'Sep 20',unread:false,msgs:[{me:false,t:'The Portra roll came back. Two of the shots are yours.'}],replies:['Show me','Which ones?']},
+        c5:{who:'wren',time:'Sep 18',unread:false,msgs:[{me:true,t:'You did not'},{me:false,t:'Haha I absolutely did'}],replies:['Legend','Photos or it didn\'t happen']},
+      },
+      cid:'c1', chatDraft:'', typing:false,
+      q:'', topic:0, added:{}, joined:{},
+      story:0, prog:0, seen:{}, storyLiked:{}, storyReply:'',
+      ptab:1, range:0,
+      set:{brief:true,csum:true,replies:true,personal:false},
+      ask:[], askDraft:'', askLoading:false,
+      notifs:[
+        {id:'n1',who:'priya',kind:'like',text:'and 24 others reacted to your photo from Maple Pass.',time:'12m',fresh:true},
+        {id:'n2',who:'hana',kind:'event',text:'invited you to Sunday dinner at hers.',time:'1h',fresh:true},
+        {id:'n3',who:'yusuf',kind:'request',text:'sent you a friend request. 9 mutual friends.',time:'2h',fresh:true},
+        {id:'n4',who:'kofi',kind:'comment',text:'commented on your post: "This bridge again? Never gets old."',time:'3h',fresh:true},
+        {id:'n5',who:'delphine',kind:'group',text:'added you to Rotterdam Film Club.',time:'Tue'},
+        {id:'n6',who:'wren',kind:'mention',text:'mentioned you in a comment on Priya\'s post.',time:'Mon'},
+        {id:'n7',who:'tomasz',kind:'like',text:'liked your comment.',time:'Sep 19'},
+      ],
+      req:null, allRead:false,
+      toast:null,
+    };
+  }
+  componentDidMount(){
+    this.iv=setInterval(()=>{ if(this.state.screen!=='story') return; const p=this.state.prog+0.011; if(p<1) this.setState({prog:p}); else this.nextStory(); },55);
+  }
+  componentDidUpdate(pp,ps){
+    if(this.props.screen!==pp.screen && this.props.screen) this.setState({screen:this.props.screen,stack:[]});
+    const ch=this.state.chats[this.state.cid];
+    if(this.state.screen==='chat' && this.chatScroll.current && (ps.screen!=='chat' || ps.chats!==this.state.chats || ps.typing!==this.state.typing)){ const el=this.chatScroll.current; el.scrollTop=el.scrollHeight; }
+    if(this.state.screen==='brief' && this.briefScroll.current && ps.ask.length!==this.state.ask.length && this.state.ask.length){ const el=this.briefScroll.current; el.scrollTo({top:el.scrollHeight,behavior:'smooth'}); }
+  }
+  componentWillUnmount(){ clearInterval(this.iv); clearTimeout(this.tt); clearTimeout(this.toastT); }
+
+  go(screen){ this.setState(s=>({stack:[...s.stack,s.screen],screen})); }
+  back(){ this.setState(s=>{ const st=s.stack.slice(); const prev=st.pop()||({register:'login',login:'onboarding',settings:'profile',chat:'messages'}[s.screen])||'feed'; return {stack:st,screen:prev}; }); }
+  tab(screen){ this.setState({screen,stack:[]}); }
+  flash(t){ clearTimeout(this.toastT); this.setState({toast:t}); this.toastT=setTimeout(()=>this.setState({toast:null}),2200); }
+  upd(key,patch){ this.setState(s=>({[key]:{...s[key],...patch}})); }
+  async ai(content,max){ const r=await window.claude.complete({messages:[{role:'user',content}],max_tokens:max||400}); return String(r).trim(); }
+
+  like(id){ this.setState(s=>({posts:s.posts.map(p=>p.id===id?{...p,liked:!p.liked,likes:p.likes+(p.liked?-1:1)}:p)})); }
+  openPost(id){ this.setState({pid:id}); this.go('post'); }
+  openStory(i){ this.setState({story:i,prog:0}); this.go('story'); }
+  nextStory(){
+    const n=this.state.story+1;
+    this.setState(s=>({seen:{...s.seen,[s.story]:true}}));
+    if(n<this.stories.length) return this.setState({story:n,prog:0});
+    if(this.state.stack.length) this.back(); else this.setState({story:0,prog:0});
+  }
+  submitLogin(){
+    const {email,pw}=this.state.login, err={};
+    if(!/^\S+@\S+\.\S+$/.test(email)) err.email='Enter a valid email address.';
+    if(pw.length<8) err.pw='Password must be at least 8 characters.';
+    this.upd('login',{err}); if(Object.keys(err).length) return;
+    this.upd('login',{loading:true});
+    setTimeout(()=>{ this.upd('login',{loading:false,pw:''}); this.tab('feed'); this.flash('Signed in as Noor'); },900);
+  }
+  submitReg(){
+    const r=this.state.reg, err={};
+    if(r.name.trim().length<2) err.name=1;
+    if(!/^\S+@\S+\.\S+$/.test(r.email)) err.email=1;
+    if(r.pw.length<8) err.pw=1;
+    if(!r.agree) err.agree=1;
+    this.upd('reg',{err}); if(Object.keys(err).length) return;
+    this.upd('reg',{loading:true});
+    setTimeout(()=>{ this.upd('reg',{loading:false}); this.tab('feed'); this.flash('Welcome to Harbor, '+r.name.trim().split(' ')[0]); },1000);
+  }
+  async regenBrief(){
+    if(this.state.briefLoading) return;
+    this.setState({briefLoading:true,briefOpen:true});
+    const posts=this.state.posts.map(p=>this.P[p.who].first+': '+p.text+' ('+p.likes+' likes, '+p.comments+' comments)').join('\n');
+    try{
+      const out=await this.ai('You write the "Brief" recap in a friends-only social app. From these posts, write exactly 3 lines. Each line is one plain sentence under 22 words that starts with the person\'s first name. No bullets, numbering, emoji, or intro.\n\n'+posts,300);
+      const keys=Object.keys(this.P).filter(k=>k!=='me');
+      const lines=out.split('\n').map(l=>l.replace(/^[-*•\d.\s]+/,'').trim()).filter(Boolean).slice(0,3);
+      const brief=lines.map(t=>({who:keys.find(k=>t.startsWith(this.P[k].first))||'ines',text:t}));
+      this.setState(s=>({brief:brief.length?brief:s.brief,briefLoading:false}));
+    }catch(e){ this.setState({briefLoading:false}); this.flash("Couldn't refresh the Brief"); }
+  }
+  async sumComments(){
+    const pid=this.state.pid, post=this.state.posts.find(p=>p.id===pid);
+    this.setState({cSumLoading:true});
+    const list=(this.state.comments[pid]||[]).map(c=>this.P[c.who].first+': '+c.text).join('\n');
+    try{
+      const out=await this.ai('Summarize the comments on this social post in two plain sentences, under 45 words total. No preamble, no emoji.\n\nPost by '+this.P[post.who].first+': '+post.text+'\n\nComments:\n'+list,200);
+      this.setState(s=>({cSum:{...s.cSum,[pid]:out},cSumLoading:false}));
+    }catch(e){ this.setState({cSumLoading:false}); this.flash("Couldn't reach Harbor AI"); }
+  }
+  addComment(){
+    const t=this.state.cDraft.trim(); if(!t) return;
+    const pid=this.state.pid;
+    this.setState(s=>({cDraft:'',comments:{...s.comments,[pid]:[...(s.comments[pid]||[]),{id:'m'+Date.now(),who:'me',text:t,time:'Just now',likes:0,liked:false}]},posts:s.posts.map(p=>p.id===pid?{...p,comments:p.comments+1}:p)}));
+  }
+  likeComment(id){ const pid=this.state.pid; this.setState(s=>({comments:{...s.comments,[pid]:s.comments[pid].map(c=>c.id===id?{...c,liked:!c.liked,likes:c.likes+(c.liked?-1:1)}:c)}})); }
+  async polish(tone){
+    const t=this.state.draft.text.trim();
+    if(!t) return this.flash('Write something first');
+    if(this.state.polishing) return;
+    this.setState({polishing:tone});
+    try{
+      const out=await this.ai('Rewrite this social media post to be '+tone.toLowerCase()+'. Keep it first person, keep every fact, no emoji, no hashtags. Return only the rewritten post.\n\n'+t,300);
+      this.setState(s=>({prevText:t,draft:{...s.draft,text:out.replace(/^"|"$/g,'')},polishing:null}));
+    }catch(e){ this.setState({polishing:null}); this.flash("Couldn't reach Harbor AI"); }
+  }
+  submitPost(){
+    const d=this.state.draft; if(!d.text.trim() && !d.photo) return;
+    const aud=['Friends','Public','Close friends'][d.aud];
+    this.setState(s=>({posts:[{id:'n'+Date.now(),who:'me',time:'Just now',place:'Rotterdam',text:d.text.trim(),imgs:d.photo?[d.photo]:[],ratio:'4/3',likes:0,liked:false,comments:0,shares:0},...s.posts],draft:{text:'',photo:null,aud:0},prevText:null,comments:{...s.comments}}));
+    this.tab('feed'); this.flash('Posted to '+aud);
+  }
+  sendChat(text){
+    const t=(text!=null?text:this.state.chatDraft).trim(); if(!t) return;
+    const cid=this.state.cid;
+    this.setState(s=>({chatDraft:'',typing:true,chats:{...s.chats,[cid]:{...s.chats[cid],unread:false,msgs:[...s.chats[cid].msgs,{me:true,t}],replies:[]}}}));
+    clearTimeout(this.tt);
+    this.tt=setTimeout(()=>{ const rep={c1:"Perfect. I'll put the kettle on.",c2:'Great, 7 it is.',c3:'Uploading now',c4:'Sending the scans tonight'}[cid]||'Ha, fair.'; this.setState(s=>({typing:false,chats:{...s.chats,[cid]:{...s.chats[cid],msgs:[...s.chats[cid].msgs,{me:false,t:rep}]}}})); },1600);
+  }
+  openChat(cid){ this.setState(s=>({cid,chats:{...s.chats,[cid]:{...s.chats[cid],unread:false}}})); this.go('chat'); }
+  async askHarbor(qIn){
+    const q=(qIn!=null?qIn:this.state.askDraft).trim(); if(!q||this.state.askLoading) return;
+    this.setState(s=>({ask:[...s.ask,{me:true,t:q}],askDraft:'',askLoading:true}));
+    const ctx=['Posts:',...this.state.posts.map(p=>'- '+this.P[p.who].name+' ('+p.time+', '+p.place+'): '+p.text),'Upcoming: Hana Sørensen\'s birthday Sunday Sep 27; library survey closes Wednesday Sep 30; Hana invited Noor to Sunday dinner.','Latest messages:',...Object.values(this.state.chats).map(c=>'- '+this.P[c.who].first+': '+c.msgs[c.msgs.length-1].t)].join('\n');
+    try{
+      const out=await window.claude.complete({system:'You are Harbor Brief, the assistant inside a friends-only social app. The user is Noor Haddad. Answer in 1 to 3 short plain sentences using only this context. If the context lacks the answer, say so. No markdown, no emoji.\n\n'+ctx,messages:[{role:'user',content:q}],max_tokens:250});
+      this.setState(s=>({ask:[...s.ask,{me:false,t:String(out).trim()}],askLoading:false}));
+    }catch(e){ this.setState(s=>({ask:[...s.ask,{me:false,t:"I couldn't reach the server. Try again in a moment."}],askLoading:false})); }
+  }
+
+  renderVals(){
+    const s=this.state, P=this.P, sc=s.screen;
+    const is={}; ['onboarding','login','register','feed','post','create','story','explore','messages','chat','notifications','profile','brief','settings'].forEach(k=>is[k]=sc===k);
+    const showTabs=['feed','explore','brief','profile'].includes(sc);
+    const tabList=[['feed','house','Home'],['explore','compass','Explore'],['brief','sparkle','Brief'],['profile','user','Profile']].map(([k,ic,label])=>{ const on=sc===k; return {on,label,isAvatar:k==='profile',isIcon:k!=='profile',cls:(on?'ph-fill ph-':'ph ph-')+ic,bg:on?'#FFFFFF':'transparent',color:on?'#18181B':'rgba(255,255,255,.72)',pad:on?'16px':'12px',ring:on?'#18181B':'transparent',go:()=>this.tab(k)}; });
+    const fmt=n=>n.toLocaleString('en-US');
+    const mapPost=p=>{ if(!p) return {a:P.me,imgs:[]}; const multi=p.imgs.length>1; return {...p,a:P[p.who],hasText:!!p.text,hasImages:p.imgs.length>0,multi,imgCount:p.imgs.length+' photos',
+      imgs:p.imgs.map(src=>({src,w:multi?'296px':'358px',ratio:p.ratio||'4/3'})),
+      likesText:fmt(p.likes),commentsText:fmt(p.comments)+' comments',sharesText:p.shares+' shares',
+      likeCls:p.liked?'ph-fill ph-heart':'ph ph-heart',likeColor:p.liked?'#2F5BD3':'#3F3F46',likeLabel:p.liked?'Liked':'Like',
+      onLike:()=>this.like(p.id),onOpen:()=>this.openPost(p.id),onShare:()=>this.flash('Link copied'),onMore:()=>this.flash('Post saved')}; };
+    const L=s.login, le=L.err||{}, R=s.reg, re=R.err||{};
+    let score=0; if(R.pw.length>=8)score++; if(/[A-Z]/.test(R.pw))score++; if(/\d/.test(R.pw))score++; if(/[^A-Za-z0-9]/.test(R.pw))score++;
+    const cur=mapPost(s.posts.find(p=>p.id===s.pid));
+    const ch0=s.chats[s.cid]||s.chats.c1;
+    const qn=s.q.trim().toLowerCase();
+    const people=Object.keys(P).filter(k=>k!=='me').map(k=>({...P[k],k}));
+    const found=qn?people.filter(u=>u.name.toLowerCase().includes(qn)):[];
+    const topicNames=['For you','Home bakers','Trail reports','Film photography','Rotterdam','Ceramics'];
+    const grids=[
+      [['hb-ex-a','230px','delphine'],['hb-ex-b','170px','priya'],['hb-ex-c','200px','kofi'],['hb-ex-d','260px','ines'],['hb-ex-e','180px','wren'],['hb-ex-f','220px','mateo'],['hb-ex-g','150px','hana'],['hb-ex-h','240px','yusuf']],
+    ];
+    const grid=grids[0].map(([seed,h,who],i)=>({src:this.pic(seed+'-'+s.topic,400,parseInt(h)*2),h,a:P[who]}));
+    const unread=s.allRead?0:s.notifs.filter(n=>n.fresh).length;
+    const kindIcon={like:'ph-fill ph-heart',comment:'ph-fill ph-chat-circle',event:'ph-fill ph-calendar-blank',request:'ph-fill ph-user-plus',group:'ph-fill ph-users-three',mention:'ph-fill ph-at'};
+    const mapN=n=>{ const isReq=n.kind==='request'; const done=isReq&&s.req; return {...n,a:P[n.who],icon:kindIcon[n.kind],text:done?(s.req==='ok'?'is now your friend.':'request removed.'):n.text,
+      bg:n.fresh&&!s.allRead?'#F5F7FE':'#FFFFFF',timeColor:n.fresh&&!s.allRead?'#2F5BD3':'#71717A',showActions:isReq&&!s.req,
+      onConfirm:()=>{this.setState({req:'ok'});this.flash('You and Yusuf are now friends');},onDelete:()=>this.setState({req:'no'})}; };
+    const sv={a:P[this.stories[s.story].who],time:this.stories[s.story].time,img:this.pic(this.stories[s.story].seed,780,1688),
+      bars:this.stories.map((x,i)=>({v:i<s.story?1:i===s.story?s.prog:0})),placeholder:'Reply to '+P[this.stories[s.story].who].first+'…',
+      heart:s.storyLiked[s.story]?'ph-fill ph-heart':'ph ph-heart'};
+    const weekBrief=[{who:'priya',text:'Priya finished three hikes this week, 46 km in total, and shared 31 photos.'},{who:'delphine',text:'Delphine started Rotterdam Film Club. Four of your friends have joined.'},{who:'kofi',text:'Kofi moved to Accra. 62 people commented on his announcement.'}];
+    const audIcons=['ph ph-users','ph ph-globe-hemisphere-west','ph ph-star'];
+    const canPost=!!(s.draft.text.trim()||s.draft.photo);
+    const T=(label,sub,key)=>({label,sub,bg:s.set[key]?'#2F5BD3':'#E4E4E7',x:s.set[key]?'20px':'0px',on:()=>this.setState(st=>({set:{...st.set,[key]:!st.set[key]}}))});
+    const bubble=(m,mine,bg,col)=>({t:m.t,justify:mine?'flex-end':'flex-start',radius:mine?'20px 20px 6px 20px':'20px 20px 20px 6px',bg,color:col});
+    return {
+      is, showTabs, tabList, set:s.set,
+      sbColor:(sc==='story'||sc==='profile')?'#FFFFFF':'#18181B', hiColor:sc==='story'?'#FFFFFF':'#18181B',
+      hasToast:!!s.toast, toast:s.toast, toastBottom:showTabs?'106px':(sc==='post'||sc==='chat'?'96px':'40px'),
+      back:()=>this.back(),
+      // onboarding
+      obX:'-'+(s.ob*33.3333)+'%', obCta:s.ob===2?'Get started':'Next',
+      obDots:[0,1,2].map(i=>({w:i===s.ob?'22px':'6px',bg:i===s.ob?'#2F5BD3':'#D4D4D8'})),
+      obNext:()=>s.ob<2?this.setState({ob:s.ob+1}):this.go('register'),
+      skipOb:()=>this.go('register'), toLogin:()=>this.go('login'), toRegister:()=>this.go('register'),
+      obDown:e=>{this.obStart=e.clientX;}, obUp:e=>{ const d=e.clientX-(this.obStart??e.clientX); if(d<-40&&s.ob<2) this.setState({ob:s.ob+1}); if(d>40&&s.ob>0) this.setState({ob:s.ob-1}); },
+      // login
+      login:L,
+      lv:{emailErr:!!le.email,emailMsg:le.email,pwErr:!!le.pw,pwMsg:le.pw,emailBorder:le.email?'#DC2626':'transparent',pwBorder:le.pw?'#DC2626':'transparent',
+        pwType:L.show?'text':'password',eye:L.show?'ph ph-eye-slash':'ph ph-eye',btn:L.loading?'Signing in…':'Sign in',btnOpacity:L.loading?0.7:1},
+      setLEmail:e=>this.upd('login',{email:e.target.value,err:{...le,email:null}}),
+      setLPw:e=>this.upd('login',{pw:e.target.value,err:{...le,pw:null}}),
+      toggleLPw:()=>this.upd('login',{show:!L.show}),
+      submitLogin:()=>this.submitLogin(),
+      forgot:()=>this.flash('Reset link sent to your email'),
+      socialLogin:()=>{ this.tab('feed'); this.flash('Signed in as Noor'); },
+      // register
+      reg:R,
+      rv:{nameErr:!!re.name,emailErr:!!re.email,pwErr:!!re.pw,agreeErr:!!re.agree,
+        nameBorder:re.name?'#DC2626':'transparent',emailBorder:re.email?'#DC2626':'transparent',pwBorder:re.pw?'#DC2626':'transparent',
+        bars:[0,1,2,3].map(i=>({bg:i<score?(score<2?'#DC2626':score<3?'#D97706':'#2F5BD3'):'#E4E4E7'})),
+        strength:R.pw?['Weak','Weak','Fair','Good','Strong'][score]:'',
+        agreeBg:R.agree?'#2F5BD3':'#FFFFFF',agreeBorder:R.agree?'#2F5BD3':(re.agree?'#DC2626':'#D4D4D8'),
+        btn:R.loading?'Creating account…':'Create account',btnOpacity:R.loading?0.7:1},
+      setRName:e=>this.upd('reg',{name:e.target.value,err:{...re,name:null}}),
+      setREmail:e=>this.upd('reg',{email:e.target.value,err:{...re,email:null}}),
+      setRPw:e=>this.upd('reg',{pw:e.target.value,err:{...re,pw:null}}),
+      toggleAgree:()=>this.upd('reg',{agree:!R.agree,err:{...re,agree:null}}),
+      submitReg:()=>this.submitReg(),
+      // feed
+      feedPosts:s.posts.map(mapPost),
+      storyCards:this.stories.map((x,i)=>({a:P[x.who],img:this.pic(x.seed,300,500),ring:s.seen[i]?'#D4D4D8':'#2F5BD3',open:()=>this.openStory(i)})),
+      briefOpen:s.briefOpen, briefLoading:s.briefLoading, briefReady:!s.briefLoading, briefRot:s.briefOpen?'180deg':'0deg',
+      briefItems:s.brief.map(b=>({...b,a:P[b.who]||P.ines})),
+      toggleBrief:()=>this.setState({briefOpen:!s.briefOpen}), regenBrief:()=>this.regenBrief(),
+      toBrief:()=>this.tab('brief'), toCreate:()=>this.go('create'),
+      toCreatePhoto:()=>{ this.setState(st=>({draft:{...st.draft,photo:this.pic('hb-draft-'+Date.now()%97,900,675)}})); this.go('create'); },
+      toNotifs:()=>this.go('notifications'), toMessages:()=>this.go('messages'),
+      hasUnread:unread>0, unreadCount:unread,
+      // post
+      cur, curComments:(s.comments[s.pid]||[]).map(c=>({...c,a:P[c.who],hasLikes:c.likes>0,likeColor:c.liked?'#2F5BD3':'#71717A',onLike:()=>this.likeComment(c.id),onReply:()=>{ this.setState({cDraft:'@'+P[c.who].first+' '}); this.commentRef.current&&this.commentRef.current.focus(); }})),
+      cSumText:s.cSum[s.pid]||'Tap refresh to summarize this thread.', cSumLoading:s.cSumLoading, cSumReady:!s.cSumLoading,
+      sumComments:()=>this.sumComments(),
+      cDraft:s.cDraft, setCDraft:e=>this.setState({cDraft:e.target.value}), cKey:e=>{ if(e.key==='Enter') this.addComment(); },
+      addComment:()=>this.addComment(), cSendBg:s.cDraft.trim()?'#2F5BD3':'#D4D4D8', commentRef:this.commentRef,
+      focusComment:()=>this.commentRef.current&&this.commentRef.current.focus(),
+      // create
+      draft:s.draft,
+      cv:{postBg:canPost?'#2F5BD3':'#F4F4F5',postColor:canPost?'#FFFFFF':'#A1A1AA',aud:['Friends','Public','Close friends'][s.draft.aud],audIcon:audIcons[s.draft.aud],
+        hasPhoto:!!s.draft.photo,hasUndo:!!s.prevText,polishing:!!s.polishing,fontSize:(s.draft.text.length<90&&!s.draft.photo)?'22px':'17px'},
+      setDraft:e=>this.setState(st=>({draft:{...st.draft,text:e.target.value}})),
+      cycleAud:()=>this.setState(st=>({draft:{...st.draft,aud:(st.draft.aud+1)%3}})),
+      addPhoto:()=>this.setState(st=>({draft:{...st.draft,photo:this.pic('hb-draft-'+Date.now()%97,900,675)}})),
+      removePhoto:()=>this.setState(st=>({draft:{...st.draft,photo:null}})),
+      undoPolish:()=>this.setState(st=>({draft:{...st.draft,text:st.prevText},prevText:null})),
+      tones:[['Clearer','ph ph-text-align-left'],['Warmer','ph ph-sun'],['Shorter','ph ph-arrows-in-line-horizontal']].map(([label,icon])=>({label,icon,opacity:s.polishing&&s.polishing!==label?0.5:1,on:()=>this.polish(label)})),
+      submitPost:()=>this.submitPost(),
+      tagPeople:()=>this.flash('Tagging opens your friends list'), addPlace:()=>this.flash('Location added: Rotterdam'), addPoll:()=>this.flash('Polls are coming soon'),
+      // story
+      sv, prevStory:()=>this.setState({story:Math.max(0,s.story-1),prog:0}), nextStory:()=>this.nextStory(),
+      likeStory:()=>this.setState(st=>({storyLiked:{...st.storyLiked,[st.story]:!st.storyLiked[st.story]}})),
+      storyReply:s.storyReply, setStoryReply:e=>this.setState({storyReply:e.target.value}),
+      storyKey:e=>{ if(e.key==='Enter'&&s.storyReply.trim()){ this.setState({storyReply:''}); this.flash('Reply sent'); } },
+      sendStoryReply:()=>{ if(s.storyReply.trim()){ this.setState({storyReply:''}); this.flash('Reply sent'); } },
+      // explore
+      q:s.q, setQ:e=>this.setState({q:e.target.value}),
+      ev:{searching:!!qn,browsing:!qn,none:!!qn&&!found.length,grid,gridTitle:s.topic===0?'Photos from friends':topicNames[s.topic],
+        people:found.map(u=>({...u,mutualText:u.mutual+' mutual friends',label:s.added[u.k]?'Requested':'Add friend',bg:s.added[u.k]?'#F4F4F5':'#EEF2FD',color:s.added[u.k]?'#52525B':'#2447AE',onAdd:()=>this.setState(st=>({added:{...st.added,[u.k]:!st.added[u.k]}}))}))},
+      topics:topicNames.map((label,i)=>({label,bg:s.topic===i?'#18181B':'#F4F4F5',color:s.topic===i?'#FFFFFF':'#3F3F46',on:()=>this.setState({topic:i})})),
+      groups:[['Rotterdam Film Club','2.4K members','hb-g-film'],['Weekend Bread Society','18K members','hb-g-bread'],['Cascades Trail Reports','9.1K members','hb-g-trail']].map(([name,members,seed])=>{ const j=s.joined[name]; return {name,members,img:this.pic(seed,500,230),label:j?'Joined':'Join',bg:j?'#F4F4F5':'#2F5BD3',color:j?'#52525B':'#FFFFFF',onJoin:()=>{ this.setState(st=>({joined:{...st.joined,[name]:!st.joined[name]}})); if(!j) this.flash('Joined '+name); }}; }),
+      // messages
+      activeNow:['hana','kofi','priya','ines','wren','delphine'].map(k=>({...P[k],open:()=>{ const cid=Object.keys(s.chats).find(c=>s.chats[c].who===k); cid?this.openChat(cid):this.flash('Say hi to '+P[k].first); }})),
+      chatList:Object.keys(s.chats).map(cid=>{ const c=s.chats[cid], last=c.msgs[c.msgs.length-1]; return {a:P[c.who],last:(last.me?'You: ':'')+last.t,time:c.time,unread:c.unread,weight:c.unread?600:400,color:c.unread?'#18181B':'#71717A',open:()=>this.openChat(cid)}; }),
+      newChat:()=>this.flash('Pick a friend to message'),
+      ch:{a:P[ch0.who],msgs:ch0.msgs.map(m=>bubble(m,m.me,m.me?'#2F5BD3':'#F4F4F5',m.me?'#FFFFFF':'#18181B')),showReplies:s.set.replies&&ch0.replies.length>0,replies:ch0.replies.map(t=>({t,on:()=>this.sendChat(t)}))},
+      typing:s.typing, chatScroll:this.chatScroll,
+      chatDraft:s.chatDraft, setChatDraft:e=>this.setState({chatDraft:e.target.value}), chatKey:e=>{ if(e.key==='Enter') this.sendChat(); },
+      sendChat:()=>this.sendChat(), chatSendBg:s.chatDraft.trim()?'#2F5BD3':'#D4D4D8',
+      callToast:()=>this.flash('Calling '+P[ch0.who].first+'…'), addPhotoChat:()=>this.flash('Photo library opens here'),
+      // notifications
+      notifNew:s.notifs.filter(n=>n.fresh).map(mapN), notifOld:s.notifs.filter(n=>!n.fresh).map(mapN),
+      markAll:()=>{ this.setState({allRead:true}); this.flash('All caught up'); },
+      // brief
+      segX:s.range?'100%':'0%', rangeToday:()=>this.setState({range:0}), rangeWeek:()=>this.setState({range:1}),
+      bv:{items:(s.range?weekBrief:s.brief).map(b=>({...b,a:P[b.who]||P.ines,open:()=>{ const p=s.posts.find(p=>p.who===b.who); p?this.openPost(p.id):this.flash('Opening '+P[b.who].first+'\'s profile'); }}))},
+      replyMateo:()=>this.openChat('c1'),
+      askThread:s.ask.map(m=>bubble(m,m.me,m.me?'#F4F4F5':'#F5F7FE','#27272A')), askLoading:s.askLoading, briefScroll:this.briefScroll,
+      askSuggest:["What did Priya post this week?","Anything I should reply to?","What's happening this weekend?"].map(t=>({t,on:()=>this.askHarbor(t)})),
+      askDraft:s.askDraft, setAskDraft:e=>this.setState({askDraft:e.target.value}), askKey:e=>{ if(e.key==='Enter') this.askHarbor(); },
+      askSend:()=>this.askHarbor(), askSendBg:s.askDraft.trim()?'#2F5BD3':'#A1A1AA',
+      // profile
+      toSettings:()=>this.go('settings'), toProfile:()=>this.tab('profile'),
+      editProfile:()=>this.flash('Edit profile opens here'), shareProfile:()=>this.flash('Profile link copied'),
+      ptabs:['Posts','Photos','About'].map((label,i)=>({label,color:s.ptab===i?'#2F5BD3':'#71717A',on:()=>this.setState({ptab:i})})),
+      ptabX:(s.ptab*100)+'%', pv:{posts:s.ptab===0,photos:s.ptab===1,about:s.ptab===2},
+      myPosts:[{time:'2 days ago',text:'Walked the Erasmusbrug at 6 AM before the cyclists woke up. Worth the alarm.',img:this.pic('hb-me-bridge',900,675),likes:148,comments:23},{time:'5 days ago',text:'Sourdough number 41. Still not the one, but closer.',img:this.pic('hb-me-bread',900,675),likes:96,comments:14}],
+      myPhotos:['bridge','bread','maas','tram','market','crane','window','rain','bikes','dune','cafe','tiles'].map(k=>this.pic('hb-me-'+k,300,300)),
+      about:[['ph ph-briefcase','Architect at Studio Veldkamp'],['ph ph-house-line','Lives in Rotterdam, Netherlands'],['ph ph-map-pin','From Amman, Jordan'],['ph ph-graduation-cap','Studied at TU Delft'],['ph ph-calendar-blank','Joined March 2019']].map(([icon,t])=>({icon,t})),
+      // settings
+      shortcuts:[['ph ph-users-three','Friends'],['ph ph-bookmark-simple','Saved'],['ph ph-circles-three-plus','Groups'],['ph ph-calendar-blank','Events'],['ph ph-clock-counter-clockwise','Memories'],['ph ph-rows','Feeds']].map(([icon,label])=>({icon,label,on:()=>this.flash(label+' opens here')})),
+      aiToggles:[T('Brief in your feed','A short summary of what you missed, at the top of Home.','brief'),T('Comment summaries','Summaries on posts with long comment threads.','csum'),T('Smart replies','Suggested replies in Messages. Generated on your device.','replies'),T('Personalize with my posts','Let Harbor AI use your own posts to tailor summaries.','personal')],
+      logout:()=>{ this.setState({screen:'login',stack:['onboarding']}); },
+    };
+  }
+}
+</script>
+</body>
+</html>

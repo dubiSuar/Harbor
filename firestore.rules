@@ -1,0 +1,441 @@
+rules_version = '2';
+
+// Harbor Firestore security rules.
+//
+// Principles:
+// - Everything requires a signed-in user.
+// - You can only write documents that are "yours" (keyed or attributed by
+//   request.auth.uid). The only cross-user writes are counters and activity
+//   items, and those are tightly constrained.
+// - Every counter is PAIRED with the document it counts: a counter may only
+//   move by exactly +/-1, and only in the same batch/transaction in which the
+//   counted document appears / disappears. Both sides are checked:
+//     * the counter update checks the doc (exists() before, existsAfter()
+//       after), and
+//     * the counted doc's create/delete checks the counter
+//       (getAfter(counter) == get(counter) +/- 1).
+//   Where one user owns several counted docs (posts, following, comments),
+//   a marker field on the counter doc (lastPostId, lastFollowId,
+//   lastCommentId) names THE doc that moved, so one batch can't move two docs
+//   with a single counter step.
+//
+//     counter                         counted doc                 marker
+//     posts/{p}.likeCount             posts/{p}/likes/{uid}       (doc id = uid)
+//     posts/{p}.commentCount          posts/{p}/comments/{c}      lastCommentId
+//     users/{u}.followersCount        users/{u}/followers/{f}     (doc id = uid)
+//     users/{u}.followingCount        users/{u}/following/{t}     lastFollowId
+//     users/{u}.postsCount            posts/{p} (authorId == u)   lastPostId
+//
+// - Rules access-call budget: 20 get()/exists() per batch request (10 for a
+//   single write). The largest batch (follow: 5 writes) uses ~11, all on 6
+//   distinct documents.
+//
+// Schema reference: src/services/backend/firebase.ts
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------------------------------------------------------------- helpers
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isUser(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function me() {
+      return request.auth.uid;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Keys changed by this update.
+    function changedKeys() {
+      return incoming().diff(existing()).affectedKeys();
+    }
+
+    // new value - old value for a numeric field.
+    function delta(field) {
+      return incoming().get(field, 0) - existing().get(field, 0);
+    }
+
+    function isShortString(value, max) {
+      return value is string && value.size() <= max;
+    }
+
+    function optionalShortString(data, field, max) {
+      return !data.keys().hasAny([field]) || isShortString(data[field], max);
+    }
+
+    function docPath(path) {
+      return /databases/$(database)/documents/$(path);
+    }
+
+    function userDoc(uid) {
+      return docPath(/users/$(uid));
+    }
+
+    function postDoc(postId) {
+      return docPath(/posts/$(postId));
+    }
+
+    // A counter field on `path` moves by exactly `step` in this request.
+    function counterStep(path, field, step) {
+      return getAfter(path).data.get(field, 0)
+        == get(path).data.get(field, 0) + step;
+    }
+
+    // --------------------------------------------------------------- users
+
+    function validProfile(d) {
+      return d.keys().hasOnly(['name', 'handle', 'bio', 'location', 'photoUrl',
+                               'photoPath', 'hue', 'followersCount',
+                               'followingCount', 'postsCount', 'lastPostId',
+                               'lastFollowId', 'createdAt', 'updatedAt',
+                               // Legacy field from before prefs moved to
+                               // private/prefs: tolerated, never writable.
+                               'prefs'])
+        && isShortString(d.name, 50) && d.name.size() > 0
+        && d.handle is string && d.handle.matches('^[a-z0-9._]{3,24}$')
+        && optionalShortString(d, 'bio', 160)
+        && optionalShortString(d, 'location', 60)
+        && optionalShortString(d, 'photoUrl', 2048)
+        && optionalShortString(d, 'photoPath', 256)
+        && optionalShortString(d, 'hue', 16)
+        && optionalShortString(d, 'lastPostId', 128)
+        && optionalShortString(d, 'lastFollowId', 128);
+    }
+
+    // Owner's followingCount: unchanged, or one step paired with
+    // users/{uid}/following/{lastFollowId} appearing / disappearing.
+    function followingPaired(uid) {
+      return delta('followingCount') == 0
+        || (incoming().get('lastFollowId', '') is string
+            && incoming().get('lastFollowId', '') != ''
+            && (
+              (delta('followingCount') == 1
+                && !exists(docPath(/users/$(uid)/following/$(incoming().lastFollowId)))
+                && existsAfter(docPath(/users/$(uid)/following/$(incoming().lastFollowId))))
+              ||
+              (delta('followingCount') == -1
+                && exists(docPath(/users/$(uid)/following/$(incoming().lastFollowId)))
+                && !existsAfter(docPath(/users/$(uid)/following/$(incoming().lastFollowId))))
+            ));
+    }
+
+    // Owner's postsCount: unchanged, or one step paired with their own
+    // posts/{lastPostId} being created / deleted.
+    function postsPaired(uid) {
+      return delta('postsCount') == 0
+        || (incoming().get('lastPostId', '') is string
+            && incoming().get('lastPostId', '') != ''
+            && (
+              (delta('postsCount') == 1
+                && !exists(postDoc(incoming().lastPostId))
+                && existsAfter(postDoc(incoming().lastPostId))
+                && getAfter(postDoc(incoming().lastPostId)).data.authorId == uid)
+              ||
+              (delta('postsCount') == -1
+                && exists(postDoc(incoming().lastPostId))
+                && get(postDoc(incoming().lastPostId)).data.authorId == uid
+                && !existsAfter(postDoc(incoming().lastPostId)))
+            ));
+    }
+
+    match /users/{uid} {
+      // Public profile: no private data lives here (prefs are in
+      // users/{uid}/private/prefs).
+      allow read: if signedIn();
+
+      allow create: if isUser(uid)
+        && validProfile(incoming())
+        && incoming().followersCount == 0
+        && incoming().followingCount == 0
+        && incoming().postsCount == 0
+        && incoming().createdAt == request.time
+        && !incoming().keys().hasAny(['prefs']);
+
+      // Owner: edit the profile. createdAt is immutable, followersCount is
+      // only ever moved by followers (below), followingCount / postsCount
+      // only move together with the doc they count.
+      allow update: if isUser(uid)
+        && validProfile(incoming())
+        && !changedKeys().hasAny(['createdAt'])
+        && (!incoming().keys().hasAny(['prefs']) || !changedKeys().hasAny(['prefs']))
+        && delta('followersCount') == 0
+        && followingPaired(uid)
+        && postsPaired(uid);
+
+      // Anyone else: ONLY followersCount +/-1, paired with their own follower
+      // doc being created / deleted in the same batch.
+      allow update: if signedIn() && !isUser(uid)
+        && changedKeys().hasOnly(['followersCount'])
+        && (
+          (delta('followersCount') == 1
+            && !exists(docPath(/users/$(uid)/followers/$(me())))
+            && existsAfter(docPath(/users/$(uid)/followers/$(me()))))
+          ||
+          (delta('followersCount') == -1
+            && exists(docPath(/users/$(uid)/followers/$(me())))
+            && !existsAfter(docPath(/users/$(uid)/followers/$(me()))))
+        );
+
+      allow delete: if false;
+
+      // users/{uid}/private/prefs: notification settings. Owner only.
+      match /private/{docId} {
+        function validPrefs(p) {
+          return p.keys().hasOnly(['pushLikes', 'pushComments', 'pushFollows',
+                                   'dailySummary'])
+            && p.get('pushLikes', true) is bool
+            && p.get('pushComments', true) is bool
+            && p.get('pushFollows', true) is bool
+            && p.get('dailySummary', true) is bool;
+        }
+
+        allow read: if isUser(uid);
+        allow create, update: if isUser(uid) && docId == 'prefs'
+          && validPrefs(incoming());
+        allow delete: if false;
+      }
+
+      // users/{uid}/following/{targetUid}: written only by uid (the follower),
+      // together with followingCount (marker lastFollowId) and the mirror
+      // users/{targetUid}/followers/{uid}.
+      match /following/{targetUid} {
+        allow read: if isUser(uid);
+        allow create: if isUser(uid) && targetUid != uid
+          && incoming().keys().hasOnly(['createdAt'])
+          && incoming().createdAt == request.time
+          && counterStep(userDoc(uid), 'followingCount', 1)
+          && getAfter(userDoc(uid)).data.get('lastFollowId', '') == targetUid
+          && existsAfter(docPath(/users/$(targetUid)/followers/$(uid)));
+        allow delete: if isUser(uid)
+          && counterStep(userDoc(uid), 'followingCount', -1)
+          && getAfter(userDoc(uid)).data.get('lastFollowId', '') == targetUid
+          && !existsAfter(docPath(/users/$(targetUid)/followers/$(uid)));
+        allow update: if false;
+      }
+
+      // users/{uid}/followers/{followerUid}: written only by the follower,
+      // together with uid's followersCount and the follower's own
+      // users/{followerUid}/following/{uid}.
+      match /followers/{followerUid} {
+        allow read: if signedIn();
+        allow create: if isUser(followerUid) && followerUid != uid
+          && incoming().keys().hasOnly(['createdAt'])
+          && incoming().createdAt == request.time
+          && counterStep(userDoc(uid), 'followersCount', 1)
+          && existsAfter(docPath(/users/$(followerUid)/following/$(uid)));
+        allow delete: if isUser(followerUid)
+          && counterStep(userDoc(uid), 'followersCount', -1)
+          && !existsAfter(docPath(/users/$(followerUid)/following/$(uid)));
+        allow update: if false;
+      }
+
+      // users/{uid}/activity/{activityId}: written by the ACTOR into the
+      // recipient's feed, only in the same batch as the action it reports.
+      // Never for yourself.
+      match /activity/{activityId} {
+        function postData(postId) {
+          return get(postDoc(postId)).data;
+        }
+
+        // thumbUrl, when present, must be the post's real image.
+        function thumbMatches(d) {
+          return !d.keys().hasAny(['thumbUrl'])
+            || d.thumbUrl == postData(d.postId).get('imageUrl', null);
+        }
+
+        // Like: deterministic id; the recipient owns the post; my like doc
+        // is created in this very batch.
+        function validLike(d) {
+          return d.postId is string
+            && activityId == 'like_' + d.postId + '_' + me()
+            && !d.keys().hasAny(['commentId', 'quote'])
+            && postData(d.postId).authorId == uid
+            && !exists(docPath(/posts/$(d.postId)/likes/$(me())))
+            && existsAfter(docPath(/posts/$(d.postId)/likes/$(me())))
+            && thumbMatches(d);
+        }
+
+        // Comment: deterministic id per comment; the recipient owns the post;
+        // the comment is mine and is created in this very batch.
+        function validComment(d) {
+          return d.postId is string
+            && d.commentId is string
+            && activityId == 'comment_' + d.commentId
+            && optionalShortString(d, 'quote', 140)
+            && postData(d.postId).authorId == uid
+            && !exists(docPath(/posts/$(d.postId)/comments/$(d.commentId)))
+            && existsAfter(docPath(/posts/$(d.postId)/comments/$(d.commentId)))
+            && getAfter(docPath(/posts/$(d.postId)/comments/$(d.commentId))).data.authorId == me()
+            && thumbMatches(d);
+        }
+
+        // Follow: deterministic id; my follower doc is created in this batch.
+        function validFollow(d) {
+          return activityId == 'follow_' + me()
+            && !d.keys().hasAny(['postId', 'commentId', 'thumbUrl', 'quote'])
+            && !exists(docPath(/users/$(uid)/followers/$(me())))
+            && existsAfter(docPath(/users/$(uid)/followers/$(me())));
+        }
+
+        allow read: if isUser(uid);
+
+        allow create: if signedIn()
+          && me() != uid
+          && incoming().keys().hasOnly(['kind', 'actorId', 'postId',
+                                        'commentId', 'thumbUrl', 'quote',
+                                        'createdAt', 'read'])
+          && incoming().actorId == me()
+          && incoming().read == false
+          && incoming().createdAt == request.time
+          && optionalShortString(incoming(), 'thumbUrl', 2048)
+          && (
+            (incoming().kind == 'like' && validLike(incoming()))
+            || (incoming().kind == 'comment' && validComment(incoming()))
+            || (incoming().kind == 'follow' && validFollow(incoming()))
+          );
+
+        // Owner may only flip `read`.
+        allow update: if isUser(uid)
+          && changedKeys().hasOnly(['read'])
+          && incoming().read is bool;
+
+        // The actor (undo: unlike / unfollow) or the owner (dismiss).
+        // resource == null: deleting an item the owner already removed is a
+        // harmless no-op and must not fail the actor's batch.
+        allow delete: if signedIn()
+          && (isUser(uid) || resource == null
+              || existing().actorId == me());
+      }
+    }
+
+    // --------------------------------------------------------------- posts
+
+    match /posts/{postId} {
+      allow read: if signedIn();
+
+      // Author only, paired with their postsCount (+1, marker lastPostId).
+      allow create: if signedIn()
+        && incoming().keys().hasOnly(['authorId', 'text', 'imageUrl',
+                                      'imagePath', 'createdAt', 'likeCount',
+                                      'commentCount'])
+        && incoming().authorId == me()
+        && isShortString(incoming().text, 500)
+        && (incoming().text.size() > 0
+            || incoming().keys().hasAny(['imageUrl']))
+        && optionalShortString(incoming(), 'imageUrl', 2048)
+        && (!incoming().keys().hasAny(['imagePath'])
+            || incoming().imagePath == 'posts/' + me() + '/' + postId + '.jpg')
+        && incoming().createdAt == request.time
+        && incoming().likeCount == 0
+        && incoming().commentCount == 0
+        && counterStep(userDoc(me()), 'postsCount', 1)
+        && getAfter(userDoc(me())).data.get('lastPostId', '') == postId;
+
+      // Anyone signed in: likeCount +/-1 paired with their own like doc.
+      allow update: if signedIn()
+        && changedKeys().hasOnly(['likeCount'])
+        && (
+          (delta('likeCount') == 1
+            && !exists(docPath(/posts/$(postId)/likes/$(me())))
+            && existsAfter(docPath(/posts/$(postId)/likes/$(me()))))
+          ||
+          (delta('likeCount') == -1
+            && exists(docPath(/posts/$(postId)/likes/$(me())))
+            && !existsAfter(docPath(/posts/$(postId)/likes/$(me()))))
+        );
+
+      // Anyone signed in: commentCount +/-1 paired with the comment named by
+      // lastCommentId appearing (add) / disappearing (moderation delete).
+      allow update: if signedIn()
+        && changedKeys().hasOnly(['commentCount', 'lastCommentId'])
+        && incoming().get('lastCommentId', '') is string
+        && incoming().get('lastCommentId', '') != ''
+        && (
+          (delta('commentCount') == 1
+            && !exists(docPath(/posts/$(postId)/comments/$(incoming().lastCommentId)))
+            && existsAfter(docPath(/posts/$(postId)/comments/$(incoming().lastCommentId))))
+          ||
+          (delta('commentCount') == -1
+            && exists(docPath(/posts/$(postId)/comments/$(incoming().lastCommentId)))
+            && !existsAfter(docPath(/posts/$(postId)/comments/$(incoming().lastCommentId))))
+        );
+
+      // Author: edit the text only (the app doesn't edit posts today).
+      // authorId, image, createdAt and counters are fixed.
+      allow update: if signedIn()
+        && existing().authorId == me()
+        && changedKeys().hasOnly(['text'])
+        && isShortString(incoming().text, 500)
+        && (incoming().text.size() > 0
+            || incoming().keys().hasAny(['imageUrl']));
+
+      // Author only, paired with their postsCount (-1, marker lastPostId).
+      allow delete: if signedIn() && existing().authorId == me()
+        && counterStep(userDoc(me()), 'postsCount', -1)
+        && getAfter(userDoc(me())).data.get('lastPostId', '') == postId;
+
+      // posts/{postId}/likes/{uid}: one per user, written only by that user,
+      // always together with likeCount.
+      match /likes/{uid} {
+        allow read: if signedIn();
+        allow create: if isUser(uid)
+          && incoming().keys().hasAll(['uid', 'createdAt'])
+          && incoming().keys().hasOnly(['uid', 'createdAt'])
+          && incoming().uid == uid
+          && incoming().createdAt == request.time
+          && counterStep(postDoc(postId), 'likeCount', 1);
+        // Paired with likeCount - 1, or orphan cleanup once the post is gone.
+        allow delete: if isUser(uid)
+          && (!existsAfter(postDoc(postId))
+              || counterStep(postDoc(postId), 'likeCount', -1));
+        allow update: if false;
+      }
+
+      // posts/{postId}/comments/{commentId}: always together with
+      // commentCount (marker lastCommentId).
+      match /comments/{commentId} {
+        allow read: if signedIn();
+        allow create: if signedIn()
+          && incoming().keys().hasOnly(['authorId', 'text', 'createdAt'])
+          && incoming().authorId == me()
+          && incoming().text is string
+          && incoming().text.size() >= 1
+          && incoming().text.size() <= 500
+          && incoming().createdAt == request.time
+          && counterStep(postDoc(postId), 'commentCount', 1)
+          && getAfter(postDoc(postId)).data.get('lastCommentId', '') == commentId;
+        // If the post is gone, the comment author may clean up. Otherwise
+        // the comment author or the post author (moderation), paired with
+        // commentCount - 1.
+        allow delete: if signedIn()
+          && (
+            (!existsAfter(postDoc(postId)) && existing().authorId == me())
+            || (exists(postDoc(postId))
+                && (existing().authorId == me()
+                    || get(postDoc(postId)).data.authorId == me())
+                && counterStep(postDoc(postId), 'commentCount', -1)
+                && getAfter(postDoc(postId)).data.get('lastCommentId', '') == commentId)
+          );
+        allow update: if false;
+      }
+    }
+
+    // Collection-group read for the "Liked" tab:
+    // collectionGroup('likes').where('uid', '==', me).
+    match /{path=**}/likes/{uid} {
+      allow read: if signedIn();
+    }
+  }
+}

@@ -11,6 +11,11 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A1B2C3D4E5F6071829304A5B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6071829304A5C /* GoogleService-Info.plist */; };
+		57D8D6B3528249E397C74FB1 /* Geist-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D285BF325AB4025859F6B53 /* Geist-Bold.ttf */; };
+		C7096D7FCEB74A1182594A22 /* Geist-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE2C1BEE150045D48BDA11EE /* Geist-Medium.ttf */; };
+		81CF725A7D9B4FE8B9DE5514 /* Geist-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A208F14844504F76A47D260F /* Geist-Regular.ttf */; };
+		9D3AC7CB3EF8444292E7492E /* Geist-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AECA65382FA4B078036FD25 /* Geist-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +28,12 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-Harbor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Harbor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Harbor/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Harbor/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A1B2C3D4E5F6071829304A5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Harbor/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		8D285BF325AB4025859F6B53 /* Geist-Bold.ttf */ = {isa = PBXFileReference; name = "Geist-Bold.ttf"; path = "../assets/fonts/Geist-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DE2C1BEE150045D48BDA11EE /* Geist-Medium.ttf */ = {isa = PBXFileReference; name = "Geist-Medium.ttf"; path = "../assets/fonts/Geist-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A208F14844504F76A47D260F /* Geist-Regular.ttf */ = {isa = PBXFileReference; name = "Geist-Regular.ttf"; path = "../assets/fonts/Geist-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6AECA65382FA4B078036FD25 /* Geist-SemiBold.ttf */ = {isa = PBXFileReference; name = "Geist-SemiBold.ttf"; path = "../assets/fonts/Geist-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +56,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				A1B2C3D4E5F6071829304A5C /* GoogleService-Info.plist */,
 			);
 			name = Harbor;
 			sourceTree = "<group>";
@@ -74,6 +85,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				E46C5EC6A00142B495A21DEE /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -96,6 +108,18 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		E46C5EC6A00142B495A21DEE /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				8D285BF325AB4025859F6B53 /* Geist-Bold.ttf */,
+				DE2C1BEE150045D48BDA11EE /* Geist-Medium.ttf */,
+				A208F14844504F76A47D260F /* Geist-Regular.ttf */,
+				6AECA65382FA4B078036FD25 /* Geist-SemiBold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -159,6 +183,11 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				A1B2C3D4E5F6071829304A5B /* GoogleService-Info.plist in Resources */,
+				57D8D6B3528249E397C74FB1 /* Geist-Bold.ttf in Resources */,
+				C7096D7FCEB74A1182594A22 /* Geist-Medium.ttf in Resources */,
+				81CF725A7D9B4FE8B9DE5514 /* Geist-Regular.ttf in Resources */,
+				9D3AC7CB3EF8444292E7492E /* Geist-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +300,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.harbor;
 				PRODUCT_NAME = Harbor;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -300,7 +329,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.harbor;
 				PRODUCT_NAME = Harbor;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_VERSION = 5.0;
